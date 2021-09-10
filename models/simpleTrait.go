@@ -78,5 +78,6 @@ func (t *SingleTrait) GetConfigFileName() string {
 type SingleTraitConfig struct {
 	Include       []string          `json:"include"`
 	Exclude       []string          `json:"exclude"`
+	IncludeSingle map[string][]string `json:"includeSingle"`
 	ExcludeSingle map[string][]string `json:"excludeSingle"`
 }

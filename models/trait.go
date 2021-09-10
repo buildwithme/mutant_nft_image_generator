@@ -16,19 +16,20 @@ type Trait struct {
 	FolderName    string         `json:"folderName"`
 	BasePath      string         `json:"basePath"`
 }
-func (t *Trait) GetTraitsByType(traitTypeToUse TraitType, exclude []string) []*SingleTrait{
+func (t *Trait) GetTraitsByType(traitTypeToUse TraitType, include, exclude []string) []*SingleTrait{
 	var traitsToReturn []*SingleTrait
 	for _, traitValue := range t.Traits {
-		if traitValue.TraitType == traitTypeToUse && !utils.ExistIn(traitValue.Name, exclude){
+		if traitValue.TraitType == traitTypeToUse && !utils.ExistIn(traitValue.Name, exclude) &&
+			(len(include) == 0 || utils.ExistIn(traitValue.Name, include)){
 			traitsToReturn = append(traitsToReturn, traitValue)
 		}
 	}
 	if len(traitsToReturn) == 0 {
 		switch traitTypeToUse {
 		case TraitSuperRare:
-			return t.GetTraitsByType(TraitRare, exclude)
+			return t.GetTraitsByType(TraitRare, include, exclude)
 		case TraitRare:
-			return t.GetTraitsByType(TraitNormal, exclude)
+			return t.GetTraitsByType(TraitNormal, include, exclude)
 		}
 	}
 	return traitsToReturn
@@ -41,6 +42,7 @@ type TraitConfig struct {
 	Include   []string `json:"include"`
 	Exclude   []string `json:"exclude"`
 	ExcludeSingle   map[string][]string `json:"excludeSingle"`
+	IncludeSingle   map[string][]string `json:"includeSingle"`
 }
 
 func NewTraitConfigFrom(path string) *TraitConfig {

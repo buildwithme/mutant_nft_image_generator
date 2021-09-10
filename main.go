@@ -19,6 +19,7 @@ func getRandom(max int) int {
 	return number
 }
 func main() {
+	n := 15
 	outputFolder := "output"
 	inputFolder := "layers"
 	err := utils.EnsureDir(outputFolder)
@@ -30,16 +31,16 @@ func main() {
 	traits.BaseFolder = inputFolder
 	traits.Configure()
 	traits.AddAll()
-	//traits.Print()
 
 	traitKeys := traits.GetTraitKeys()
-	for i:=0; i<15; i++ {
+	for i := 0; i < n; i++ {
 		fmt.Println(i)
-		imageCreator := NewImageCreator()
+		imageCreator := models.NewImageCreator()
 
 		var includeTraits []string
 		var excludeTraits []string
-		var excludeSingleTraits = make( map[string][]string)
+		var excludeSingleTraits = make(map[string][]string)
+		var includeSingleTraits = make(map[string][]string)
 
 		for _, keyNumber := range traitKeys {
 			key := traits.Mapping[keyNumber]
@@ -50,7 +51,7 @@ func main() {
 			}
 
 			traitTypeNumber := getRandom(100 * 100)
-			if keyNumber == 1 {// TODO remove
+			if keyNumber == 1 { // TODO remove
 				for traitTypeNumber > 100 {
 					traitTypeNumber = getRandom(100 * 100)
 				}
@@ -75,13 +76,22 @@ func main() {
 
 			includeTraits = append(includeTraits, trait.TraitConfig.Include...)
 			excludeTraits = append(excludeTraits, trait.TraitConfig.Exclude...)
-			for keyExclude,value := range trait.TraitConfig.ExcludeSingle {
+			for keyExclude, value := range trait.TraitConfig.ExcludeSingle {
+				if !utils.ExistIn(keyExclude, excludeTraits) {
+					excludeTraits = append(excludeTraits, keyExclude)
+				}
 				excludeSingleTraits[keyExclude] = append(excludeSingleTraits[keyExclude], value...)
+			}
+			for keyInclude, value := range trait.TraitConfig.IncludeSingle {
+				if !utils.ExistIn(keyInclude, includeTraits) {
+					includeTraits = append(includeTraits, keyInclude)
+				}
+				includeSingleTraits[keyInclude] = append(includeSingleTraits[keyInclude], value...)
 			}
 
 			traitTypeToUse := models.TraitNormal
 
-			if trait.MainTraitType != models.TraitSuperRare  && trait.MainTraitType != models.TraitRare {
+			if trait.MainTraitType != models.TraitSuperRare && trait.MainTraitType != models.TraitRare {
 				randomTraitsTypeMax := getRandom(100 * 100)
 				//if keyNumber == 0 || keyNumber == 1 { // TODO remove
 				//	for randomTraitsTypeMax > 1000 {
@@ -95,7 +105,7 @@ func main() {
 				}
 			}
 
-			traitsToUSe := trait.GetTraitsByType(traitTypeToUse, excludeSingleTraits[trait.Name])
+			traitsToUSe := trait.GetTraitsByType(traitTypeToUse, includeSingleTraits[trait.Name], excludeSingleTraits[trait.Name])
 			n := len(traitsToUSe)
 			if n == 0 {
 				continue
@@ -103,34 +113,27 @@ func main() {
 			randomTraitNumber := getRandom(n)
 
 			choosedTrait := traitsToUSe[randomTraitNumber]
-			if choosedTrait.Config != nil{
+			if choosedTrait.Config != nil {
 				includeTraits = append(includeTraits, choosedTrait.Config.Include...)
 				excludeTraits = append(excludeTraits, choosedTrait.Config.Exclude...)
-				for keyExclude,value := range choosedTrait.Config.ExcludeSingle{
+				for keyExclude, value := range choosedTrait.Config.ExcludeSingle {
+					if !utils.ExistIn(keyExclude, excludeTraits) {
+						excludeTraits = append(excludeTraits, keyExclude)
+					}
 					excludeSingleTraits[keyExclude] = append(excludeSingleTraits[keyExclude], value...)
 				}
+				for keyInclude, value := range choosedTrait.Config.IncludeSingle {
+					if !utils.ExistIn(keyInclude, includeTraits) {
+						includeTraits = append(includeTraits, keyInclude)
+					}
+					includeSingleTraits[keyInclude] = append(includeSingleTraits[keyInclude], value...)
+				}
 			}
-			imageCreator.Add(choosedTrait.BasePath)
+			imageCreator.Add(trait, choosedTrait)
 		}
 		_ = imageCreator.Process()
 		imageCreator.WriteTo(fmt.Sprintf(outputFolder+"/%d.png", i))
 	}
-	//
-	//var n = 0
-	//for i := 0; i < n; i++ {
-	//	imageCreator := NewImageCreator()
-	//	imageCreator.Add(
-	//		"layers/0_background/gray.png",
-	//		"layers/2_specialBehind_r/fire.png",
-	//		"layers/5_skin/skin2.png",
-	//		"layers/8_hoodie/black_hoodie.png",
-	//		"layers/6_hair/brownhair.png",
-	//		"layers/7_short/greenshorts.png",
-	//		"layers/10_shue/redGreen.png",
-	//		"layers/3_tail/3_tail.png",
-	//	)
-	//	_ = imageCreator.Process()
-	//	imageCreator.WriteTo(fmt.Sprintf(outputFolder + "/%d.png", i))
-	//}
 
+	utils.PrintJson(models.TraitSaved)
 }
