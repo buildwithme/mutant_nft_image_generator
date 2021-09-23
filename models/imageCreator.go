@@ -1,6 +1,7 @@
 package models
 
 import (
+	"crypto/sha256"
 	"errors"
 	"fmt"
 	"github.com/nfnt/resize"
@@ -10,11 +11,16 @@ import (
 	"image/png"
 	"image_generator/utils"
 	"os"
+	"sort"
+	"strings"
 )
 
 var cacheCounter int
 var cacheImage = make(map[string]int)
 var imageIndex = make(map[int]image.Image)
+
+
+var currentHashes = make(map[string]bool)
 
 type TraitSavedConf struct {
 	Value string `json:"value"`
@@ -22,49 +28,78 @@ type TraitSavedConf struct {
 	Path string `json:"path"`
 }
 
-var TraitSaved = make(map[int][]TraitSavedConf)
+var TraitSaved = make(map[int]map[int]TraitSavedConf)
 var traitSavedCount  =1
 
 func NewImageCreator() *ImageCreator {
-	return &ImageCreator{}
+	img := &ImageCreator{}
+	img.ExcludeSingleTraits  = make(map[string][]string)
+	img.IncludeSingleTraits  = make(map[string][]string)
+	return img
 }
 
 type ImageCreator struct {
 	Paths  []string
 	images []int
 	final  *image.RGBA
+
+	IncludeTraits []string
+	ExcludeTraits []string
+	ExcludeSingleTraits map[string][]string
+	IncludeSingleTraits map[string][]string
 }
 
 func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 	imagePath := choosedType.BasePath
 
-	TraitSaved[traitSavedCount] = append(TraitSaved[traitSavedCount], TraitSavedConf{
-		Value: choosedType.Name,
-		TraitType: trait.Name,
-		Path: choosedType.BasePath,
-	})
-
 	c.Paths = append(c.Paths, imagePath)
 
+	var counter int
 	if indexImage, ok := cacheImage[imagePath]; ok {
-		c.images = append(c.images, indexImage)
-		return
+		counter = indexImage
+	} else {
+		sourceImage := getImage(imagePath)
+		sourceImageFinal := resize.Resize(5100, 5100, sourceImage, resize.Lanczos3)
+		cacheImage[imagePath] = cacheCounter
+		imageIndex[cacheCounter] = sourceImageFinal
+		counter = cacheCounter
+		cacheCounter++
 	}
-	sourceImage := getImage(imagePath)
-	// resize to width 1000 using Lanczos resampling
-	// and preserve aspect ratio
-	sourceImageFinal := resize.Resize(1096, 1096, sourceImage, resize.Lanczos3)
+	if TraitSaved[traitSavedCount] == nil {
+		TraitSaved[traitSavedCount] = make(map[int]TraitSavedConf)
+	}
 
-	cacheImage[imagePath] = cacheCounter
-	imageIndex[cacheCounter] = sourceImageFinal
-	c.images = append(c.images, cacheCounter)
-	cacheCounter++
-
+	TraitSaved[traitSavedCount][counter] = TraitSavedConf{
+		Value: choosedType.Name,
+		TraitType: trait.Name,
+		Path: imagePath,
+	}
+	c.images = append(c.images, counter)
 }
 
 func (c *ImageCreator) Process() *image.RGBA {
+
 	for i, imageSourceIndex := range c.images {
+		traitConfig := TraitSaved[traitSavedCount]
+		if len(c.ExcludeTraits) > 0 && utils.ExistIn(traitConfig[imageSourceIndex].TraitType, c.ExcludeTraits) {
+			delete(traitConfig, imageSourceIndex)
+			continue
+		}
+		if len(c.IncludeTraits) > 0 && !utils.ExistIn(traitConfig[imageSourceIndex].TraitType, c.IncludeTraits) {
+			delete(traitConfig, imageSourceIndex)
+			continue
+		}
+
+		if len(c.ExcludeSingleTraits) > 0 && utils.ExistSingleIn(traitConfig[imageSourceIndex].TraitType, traitConfig[imageSourceIndex].Value, c.ExcludeSingleTraits) {
+			delete(traitConfig, imageSourceIndex)
+			continue
+		}
+		if len(c.IncludeSingleTraits) > 0 && !utils.ExistSingleIn(traitConfig[imageSourceIndex].TraitType, traitConfig[imageSourceIndex].Value, c.IncludeSingleTraits) {
+			delete(traitConfig, imageSourceIndex)
+			continue
+		}
 		imageSource := imageIndex[imageSourceIndex]
+
 		drawType := draw.Src
 		if i != 0 {
 			drawType = draw.Over
@@ -75,6 +110,33 @@ func (c *ImageCreator) Process() *image.RGBA {
 		draw.Draw(c.final, imageSource.Bounds(), imageSource, image.Point{}, drawType)
 	}
 	return c.final
+}
+
+func (c ImageCreator) IsHashValid() bool {
+
+	var trait = TraitSaved[traitSavedCount];
+	var paths []string
+
+	var keys []int
+	for key := range trait {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
+
+	for _, i := range keys {
+		paths = append(paths, trait[i].Path)
+	}
+
+	fullJointPath:= strings.Join(paths,",")
+
+	hash := fmt.Sprintf("%x",sha256.Sum256([]byte(fullJointPath)))
+	fmt.Println(hash)
+	if _, ok := currentHashes[hash]; ok {
+		delete(TraitSaved, traitSavedCount)
+		return false
+	}
+	currentHashes[hash] = true
+	return true
 }
 
 func (c ImageCreator) WriteTo(outputPath string) {

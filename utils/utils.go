@@ -69,3 +69,17 @@ func ExistIn(name string, names[]string) bool {
 	}
 	return false
 }
+
+func ExistSingleIn(traitType, traitValue string, names map[string][]string) bool {
+	for key, nameValues := range names {
+		if key != traitType {
+			continue
+		}
+		for _, nameValue := range nameValues {
+			if traitValue == nameValue {
+				return true
+			}
+		}
+	}
+	return false
+}

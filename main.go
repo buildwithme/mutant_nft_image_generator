@@ -18,10 +18,15 @@ func getRandom(max int) int {
 	counter++
 	return number
 }
+
 func main() {
-	n := 15
-	outputFolder := "output"
-	inputFolder := "layers"
+	//execute("common_layers", "common_layers", 100)
+	//execute("astronaut_layers", "_astronaut_layers", 100)
+	//execute("robot_layers", "_robot_layers", 100)
+	//execute("aliens_layers", "_aliens_layers", 100)
+	//execute("flame_layers", "_flame_layers", 100)
+}
+func execute(outputFolder, inputFolder string, n int) {
 	err := utils.EnsureDir(outputFolder)
 	if err != nil {
 		log.Fatal(err)
@@ -34,13 +39,8 @@ func main() {
 
 	traitKeys := traits.GetTraitKeys()
 	for i := 0; i < n; i++ {
-		fmt.Println(i)
+		fmt.Printf("%s - %d\n", inputFolder, i)
 		imageCreator := models.NewImageCreator()
-
-		var includeTraits []string
-		var excludeTraits []string
-		var excludeSingleTraits = make(map[string][]string)
-		var includeSingleTraits = make(map[string][]string)
 
 		for _, keyNumber := range traitKeys {
 			key := traits.Mapping[keyNumber]
@@ -50,62 +50,65 @@ func main() {
 				utils.Fatal(errors.New("include and exclude defined"))
 			}
 
-			traitTypeNumber := getRandom(100 * 100)
-			if keyNumber == 1 { // TODO remove
-				for traitTypeNumber > 100 {
-					traitTypeNumber = getRandom(100 * 100)
-				}
-			}
-			if trait.MainTraitType == models.TraitSuperRare {
-				if traitTypeNumber > traits.Config.SuperRare*100 {
-					continue
-				}
-			} else if trait.MainTraitType == models.TraitRare {
-				if traitTypeNumber > traits.Config.Rare*100 {
-					continue
+			if !trait.TraitConfig.Required {
+				traitTypeNumber := getRandom(100 * 100)
+				if trait.MainTraitType == models.TraitSuperRare {
+					if traitTypeNumber > traits.Config.SuperRare*100 {
+						continue
+					}
+				} else if trait.MainTraitType == models.TraitRare {
+					if traitTypeNumber > traits.Config.Rare*100 {
+						continue
+					}
 				}
 			}
 
-			if len(excludeTraits) > 0 && utils.ExistIn(trait.Name, excludeTraits) {
+			if len(imageCreator.ExcludeTraits) > 0 && utils.ExistIn(trait.Name, imageCreator.ExcludeTraits) {
 				continue
 			}
 
-			if len(includeTraits) > 0 && !utils.ExistIn(trait.Name, includeTraits) {
+			if len(imageCreator.IncludeTraits) > 0 && !utils.ExistIn(trait.Name, imageCreator.IncludeTraits) {
 				continue
 			}
 
-			includeTraits = append(includeTraits, trait.TraitConfig.Include...)
-			excludeTraits = append(excludeTraits, trait.TraitConfig.Exclude...)
+			imageCreator.IncludeTraits = append(imageCreator.IncludeTraits, trait.TraitConfig.Include...)
+			imageCreator.ExcludeTraits = append(imageCreator.ExcludeTraits, trait.TraitConfig.Exclude...)
 			for keyExclude, value := range trait.TraitConfig.ExcludeSingle {
-				if !utils.ExistIn(keyExclude, excludeTraits) {
-					excludeTraits = append(excludeTraits, keyExclude)
+				if !utils.ExistIn(keyExclude, imageCreator.ExcludeTraits) {
+					imageCreator.ExcludeTraits = append(imageCreator.ExcludeTraits, keyExclude)
 				}
-				excludeSingleTraits[keyExclude] = append(excludeSingleTraits[keyExclude], value...)
+				imageCreator.ExcludeSingleTraits[keyExclude] = append(imageCreator.ExcludeSingleTraits[keyExclude], value...)
 			}
 			for keyInclude, value := range trait.TraitConfig.IncludeSingle {
-				if !utils.ExistIn(keyInclude, includeTraits) {
-					includeTraits = append(includeTraits, keyInclude)
+				if !utils.ExistIn(keyInclude, imageCreator.IncludeTraits) {
+					imageCreator.IncludeTraits = append(imageCreator.IncludeTraits, keyInclude)
 				}
-				includeSingleTraits[keyInclude] = append(includeSingleTraits[keyInclude], value...)
+				imageCreator.IncludeSingleTraits[keyInclude] = append(imageCreator.IncludeSingleTraits[keyInclude], value...)
 			}
 
-			traitTypeToUse := models.TraitNormal
+			var traitTypeToUse models.TraitType
 
-			if trait.MainTraitType != models.TraitSuperRare && trait.MainTraitType != models.TraitRare {
+			if trait.MainTraitType == models.TraitNormal {
 				randomTraitsTypeMax := getRandom(100 * 100)
-				//if keyNumber == 0 || keyNumber == 1 { // TODO remove
-				//	for randomTraitsTypeMax > 1000 {
-				//		randomTraitsTypeMax = getRandom(100 * 100)
-				//	}
-				//}
 				if randomTraitsTypeMax <= trait.TraitConfig.SuperRare*100 {
 					traitTypeToUse = models.TraitSuperRare
 				} else if randomTraitsTypeMax <= trait.TraitConfig.Rare*100 {
 					traitTypeToUse = models.TraitRare
+				} else {
+					traitTypeToUse = models.TraitNormal
 				}
+			} else if trait.MainTraitType == models.TraitRare {
+				randomTraitsTypeMax := getRandom(100 * 100)
+				if randomTraitsTypeMax <= trait.TraitConfig.SuperRare*100 {
+					traitTypeToUse = models.TraitSuperRare
+				} else {
+					traitTypeToUse = models.TraitRare
+				}
+			} else {
+				traitTypeToUse = models.TraitSuperRare
 			}
 
-			traitsToUSe := trait.GetTraitsByType(traitTypeToUse, includeSingleTraits[trait.Name], excludeSingleTraits[trait.Name])
+			traitsToUSe := trait.GetTraitsByType(traitTypeToUse, imageCreator.IncludeSingleTraits[trait.Name], imageCreator.ExcludeSingleTraits[trait.Name])
 			n := len(traitsToUSe)
 			if n == 0 {
 				continue
@@ -113,26 +116,25 @@ func main() {
 			randomTraitNumber := getRandom(n)
 
 			choosedTrait := traitsToUSe[randomTraitNumber]
+			imageCreator.Add(trait, choosedTrait)
 			if choosedTrait.Config != nil {
-				includeTraits = append(includeTraits, choosedTrait.Config.Include...)
-				excludeTraits = append(excludeTraits, choosedTrait.Config.Exclude...)
+				imageCreator.IncludeTraits = append(imageCreator.IncludeTraits, choosedTrait.Config.Include...)
+				imageCreator.ExcludeTraits = append(imageCreator.ExcludeTraits, choosedTrait.Config.Exclude...)
 				for keyExclude, value := range choosedTrait.Config.ExcludeSingle {
-					if !utils.ExistIn(keyExclude, excludeTraits) {
-						excludeTraits = append(excludeTraits, keyExclude)
-					}
-					excludeSingleTraits[keyExclude] = append(excludeSingleTraits[keyExclude], value...)
+					imageCreator.ExcludeSingleTraits[keyExclude] = append(imageCreator.ExcludeSingleTraits[keyExclude], value...)
 				}
 				for keyInclude, value := range choosedTrait.Config.IncludeSingle {
-					if !utils.ExistIn(keyInclude, includeTraits) {
-						includeTraits = append(includeTraits, keyInclude)
-					}
-					includeSingleTraits[keyInclude] = append(includeSingleTraits[keyInclude], value...)
+					imageCreator.IncludeSingleTraits[keyInclude] = append(imageCreator.IncludeSingleTraits[keyInclude], value...)
 				}
 			}
-			imageCreator.Add(trait, choosedTrait)
 		}
 		_ = imageCreator.Process()
-		imageCreator.WriteTo(fmt.Sprintf(outputFolder+"/%d.png", i))
+
+		if !imageCreator.IsHashValid() {
+			i--
+			continue
+		}
+		imageCreator.WriteTo(fmt.Sprintf("output/%s/%d.png", outputFolder, i))
 	}
 
 	utils.PrintJson(models.TraitSaved)

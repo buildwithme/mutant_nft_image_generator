@@ -1,0 +1,5 @@
+{
+  "excludeSingle": {
+    "eye": ["orangeeye","pinkeye","yelloweye","purpleeye"]
+  }
+}

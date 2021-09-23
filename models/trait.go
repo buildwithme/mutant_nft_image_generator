@@ -43,6 +43,7 @@ type TraitConfig struct {
 	Exclude   []string `json:"exclude"`
 	ExcludeSingle   map[string][]string `json:"excludeSingle"`
 	IncludeSingle   map[string][]string `json:"includeSingle"`
+	Required bool `json:"required"`
 }
 
 func NewTraitConfigFrom(path string) *TraitConfig {
@@ -55,7 +56,7 @@ func NewTraitConfigFrom(path string) *TraitConfig {
 		log.Panic(err)
 	}
 	if config.Count == 0 {
-		config.Count++
+		config.Count++ // TODO ... multiple traits
 	}
 	return &config
 }
