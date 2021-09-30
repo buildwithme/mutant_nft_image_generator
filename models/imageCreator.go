@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	"github.com/nfnt/resize"
 	"image"
 	"image/draw"
 	"image/jpeg"
@@ -13,38 +12,81 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"sync"
+
+	"github.com/nfnt/resize"
 )
 
 var cacheCounter int
 var cacheImage = make(map[string]int)
 var imageIndex = make(map[int]image.Image)
 
-
-var currentHashes = make(map[string]bool)
-
-type TraitSavedConf struct {
-	Value string `json:"value"`
-	TraitType string `json:"trait_type"`
-	Path string `json:"path"`
+type Hashes struct {
+	mu            sync.Mutex
+	CurrentHashes map[string]bool
 }
 
-var TraitSaved = make(map[int]map[int]TraitSavedConf)
-var traitSavedCount  =1
+var SavedHashes *Hashes = &Hashes{
+	CurrentHashes: make(map[string]bool),
+}
 
-func NewImageCreator() *ImageCreator {
+type TraitSavedConf struct {
+	Value     string `json:"value"`
+	TraitType string `json:"trait_type"`
+	Path      string `json:"path"`
+}
+
+// SafeCounter is safe to use concurrently.
+type TraitSaved struct {
+	mu              sync.Mutex
+	Data            map[int]map[int]TraitSavedConf
+	TraitSavedCount int
+}
+
+var SavedTraits *TraitSaved = NewSavedTraits()
+
+func NewSavedTraits() *TraitSaved {
+	var d = TraitSaved{}
+	d.Data = make(map[int]map[int]TraitSavedConf)
+	d.TraitSavedCount = 1
+	return &d
+}
+func (s *TraitSaved) Add() {
+
+}
+func (s *TraitSaved) Exists(id int) bool {
+	return s.Data[id] != nil
+}
+func (s *TraitSaved) Lock() {
+	defer func() {
+		err := recover()
+		if err != nil {
+			fmt.Println("==================err")
+			fmt.Println(err)
+		}
+	}()
+	s.mu.Lock()
+}
+func (s *TraitSaved) Unlock() {
+	s.mu.Unlock()
+}
+
+func NewImageCreator(id int) *ImageCreator {
 	img := &ImageCreator{}
-	img.ExcludeSingleTraits  = make(map[string][]string)
-	img.IncludeSingleTraits  = make(map[string][]string)
+	img.id = id
+	img.ExcludeSingleTraits = make(map[string][]string)
+	img.IncludeSingleTraits = make(map[string][]string)
 	return img
 }
 
 type ImageCreator struct {
+	id     int
 	Paths  []string
 	images []int
 	final  *image.RGBA
 
-	IncludeTraits []string
-	ExcludeTraits []string
+	IncludeTraits       []string
+	ExcludeTraits       []string
 	ExcludeSingleTraits map[string][]string
 	IncludeSingleTraits map[string][]string
 }
@@ -59,20 +101,21 @@ func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 		counter = indexImage
 	} else {
 		sourceImage := getImage(imagePath)
-		sourceImageFinal := resize.Resize(5100, 5100, sourceImage, resize.Lanczos3)
+		sourceImageFinal := resize.Resize(2048, 2048, sourceImage, resize.Lanczos3)
 		cacheImage[imagePath] = cacheCounter
 		imageIndex[cacheCounter] = sourceImageFinal
 		counter = cacheCounter
 		cacheCounter++
 	}
-	if TraitSaved[traitSavedCount] == nil {
-		TraitSaved[traitSavedCount] = make(map[int]TraitSavedConf)
+
+	if !SavedTraits.Exists(c.id) {
+		SavedTraits.Data[c.id] = make(map[int]TraitSavedConf)
 	}
 
-	TraitSaved[traitSavedCount][counter] = TraitSavedConf{
-		Value: choosedType.Name,
+	SavedTraits.Data[c.id][counter] = TraitSavedConf{
+		Value:     choosedType.Name,
 		TraitType: trait.Name,
-		Path: imagePath,
+		Path:      imagePath,
 	}
 	c.images = append(c.images, counter)
 }
@@ -80,7 +123,7 @@ func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 func (c *ImageCreator) Process() *image.RGBA {
 
 	for i, imageSourceIndex := range c.images {
-		traitConfig := TraitSaved[traitSavedCount]
+		traitConfig := SavedTraits.Data[c.id]
 		if len(c.ExcludeTraits) > 0 && utils.ExistIn(traitConfig[imageSourceIndex].TraitType, c.ExcludeTraits) {
 			delete(traitConfig, imageSourceIndex)
 			continue
@@ -113,8 +156,7 @@ func (c *ImageCreator) Process() *image.RGBA {
 }
 
 func (c ImageCreator) IsHashValid() bool {
-
-	var trait = TraitSaved[traitSavedCount];
+	var trait = SavedTraits.Data[c.id]
 	var paths []string
 
 	var keys []int
@@ -127,15 +169,21 @@ func (c ImageCreator) IsHashValid() bool {
 		paths = append(paths, trait[i].Path)
 	}
 
-	fullJointPath:= strings.Join(paths,",")
+	fullJointPath := strings.Join(paths, ",")
 
-	hash := fmt.Sprintf("%x",sha256.Sum256([]byte(fullJointPath)))
+	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(fullJointPath)))
 	fmt.Println(hash)
-	if _, ok := currentHashes[hash]; ok {
-		delete(TraitSaved, traitSavedCount)
+
+	SavedHashes.mu.Lock()
+	if _, ok := SavedHashes.CurrentHashes[hash]; ok {
+		SavedHashes.mu.Unlock()
+		delete(SavedTraits.Data, c.id)
 		return false
+	} else {
+		SavedHashes.CurrentHashes[hash] = true
+		SavedHashes.mu.Unlock()
 	}
-	currentHashes[hash] = true
+
 	return true
 }
 
@@ -149,7 +197,7 @@ func (c ImageCreator) WriteTo(outputPath string) {
 	}
 	jpeg.Encode(finalImageOutput, c.final, &jpeg.Options{jpeg.DefaultQuality})
 	finalImageOutput.Close()
-	traitSavedCount++
+	SavedTraits.TraitSavedCount++
 }
 
 func getImage(imagePath string) image.Image {

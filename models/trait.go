@@ -47,6 +47,20 @@ type TraitConfig struct {
 }
 
 func NewTraitConfigFrom(path string) *TraitConfig {
+	if !utils.FleExists( path) {
+		return &TraitConfig{
+			Normal:        100,
+			Rare:          25,
+			SuperRare:     5,
+			Count:         0,
+			Include:       nil,
+			Exclude:       nil,
+			ExcludeSingle: make( map[string][]string),
+			IncludeSingle: make( map[string][]string),
+			Required:      false,
+		}
+	}
+
 	config := TraitConfig{}
 
 	body := utils.ReadAll(path)
@@ -104,11 +118,12 @@ func (t *Trait) AddAll(folderName string) {
 	if err != nil {
 		log.Panic(err)
 	}
+	t.TraitConfig = NewTraitConfigFrom(t.BasePath + "/" + configFileName)
 	for _, file := range files {
 		if file.Name() == configFileName {
-			t.TraitConfig = NewTraitConfigFrom(t.BasePath + "/" + file.Name())
 			continue
-		} else if extension := utils.GetExtension(file.Name()); extension != "png" {
+		}
+		if extension := utils.GetExtension(file.Name()); extension != "png" {
 			continue
 		}
 

@@ -58,8 +58,18 @@ func (t * TraitsManager) GetTraitKeys() []int {
 }
 
 func (t *TraitsManager) Configure() {
+	filePath := t.BaseFolder + "/config.json"
+	if !utils.FleExists( filePath) {
+		t.Config = &TraitManagerConfig{
+			Normal:    100,
+			Rare:      25,
+			SuperRare: 5,
+		}
+		return
+	}
+
 	var config TraitManagerConfig
-	body := utils.ReadAll(t.BaseFolder + "/config.json" )
+	body := utils.ReadAll(filePath)
 
 	err := json.Unmarshal(body, &config)
 	if err != nil {

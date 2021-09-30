@@ -56,16 +56,24 @@ func (t *SingleTrait) Configure() {
 	t.ConfigFile()
 }
 func (t *SingleTrait) ConfigFile() {
-	path := t.GetConfigFileName()
-	if utils.FleExists(path) {
-		var singleTraitConfig SingleTraitConfig
-		body := utils.ReadAll(path)
-		err := json.Unmarshal(body, &singleTraitConfig)
-		if err != nil {
-			log.Panic(err)
+	filePath := t.GetConfigFileName()
+	if !utils.FleExists( filePath) {
+		t.Config = &SingleTraitConfig{
+			Include:       nil,
+			Exclude:       nil,
+			IncludeSingle: make(map[string][]string),
+			ExcludeSingle: make(map[string][]string),
 		}
-		t.Config = &singleTraitConfig
+		return
 	}
+
+	var singleTraitConfig SingleTraitConfig
+	body := utils.ReadAll(filePath)
+	err := json.Unmarshal(body, &singleTraitConfig)
+	if err != nil {
+		log.Panic(err)
+	}
+	t.Config = &singleTraitConfig
 }
 
 func (t *SingleTrait) GetConfigFileName() string {
