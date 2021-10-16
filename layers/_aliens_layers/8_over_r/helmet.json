@@ -1,9 +1,0 @@
-{
-  "exclude": [
-   "mouth",
-    "hair"
-  ],
-  "excludeSingle": {
-    "specialOver" : ["backpack","necklace"]
-  }
-}
