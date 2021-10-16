@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	execute("images", "layers_2", n)
+	execute("images", "vegas_inferno_source", n)
 	//execute("astronaut_layers", "_astronaut_layers", 100)
 	//execute("robot_layers", "_robot_layers", 100)
 	//execute("aliens_layers", "_aliens_layers", 100)
