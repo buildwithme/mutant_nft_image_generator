@@ -58,7 +58,7 @@ func (t * TraitsManager) GetTraitKeys() []int {
 }
 
 func (t *TraitsManager) Configure() {
-	filePath := t.BaseFolder + "/config.json"
+	filePath := t.BaseFolder + "/Lion Onesie.json"
 	if !utils.FleExists( filePath) {
 		t.Config = &TraitManagerConfig{
 			Normal:    100,
