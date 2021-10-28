@@ -25,22 +25,23 @@ func getRandom(max int) int {
 }
 
 func main() {
+	var n int = 10
 	//argsWithProg := os.Args
 	argsWithoutProg := os.Args[1:]
 
-	n, err := strconv.Atoi(argsWithoutProg[0])
-	if err != nil {
-		log.Fatal(err)
+	if len(argsWithoutProg) > 0 {
+		var err error
+		n, err = strconv.Atoi(argsWithoutProg[0])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	execute("images", "vegas_inferno_source", n)
-	//execute("astronaut_layers", "_astronaut_layers", 100)
-	//execute("robot_layers", "_robot_layers", 100)
-	//execute("aliens_layers", "_aliens_layers", 100)
-	//execute("flame_layers", "_flame_layers", 100)
 }
 func execute(outputFolder, inputFolder string, n int) {
-	err := utils.EnsureDir(outputFolder)
+	baseOutput := "output"
+	err := utils.EnsureDir(baseOutput + "/" + outputFolder)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -156,7 +157,7 @@ func execute(outputFolder, inputFolder string, n int) {
 				return
 			}
 			atomic.AddUint64(&counter, 1)
-			imageCreator.WriteTo(fmt.Sprintf("output/%s/%d.png", outputFolder, i))
+			imageCreator.WriteTo(fmt.Sprintf(baseOutput+"/%s/%d.png", outputFolder, i))
 		}(index)
 	}
 
