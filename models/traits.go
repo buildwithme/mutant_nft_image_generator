@@ -19,15 +19,15 @@ func NewTraits() *TraitsManager {
 
 type TraitsManager struct {
 	BaseFolder string `json:"baseFolder"`
-	Traits map[string]Trait
-	N int `json:"traitCount"`
-	Mapping map[int]string
-	Config   *TraitManagerConfig   `json:"config"`
+	Traits     map[string]Trait
+	N          int `json:"traitCount"`
+	Mapping    map[int]string
+	Config     *TraitManagerConfig `json:"config"`
 }
 type TraitManagerConfig struct {
-	Normal    int      `json:"normal"`
-	Rare      int      `json:"rare"`
-	SuperRare int      `json:"superRare"`
+	Normal    int `json:"normal"`
+	Rare      int `json:"rare"`
+	SuperRare int `json:"superRare"`
 }
 
 func (t *TraitsManager) AddAll() {
@@ -48,7 +48,7 @@ func (t *TraitsManager) AddAll() {
 	}
 }
 
-func (t * TraitsManager) GetTraitKeys() []int {
+func (t *TraitsManager) GetTraitKeys() []int {
 	var traitKeys []int
 	for key := range t.Mapping {
 		traitKeys = append(traitKeys, key)
@@ -58,8 +58,8 @@ func (t * TraitsManager) GetTraitKeys() []int {
 }
 
 func (t *TraitsManager) Configure() {
-	filePath := t.BaseFolder + "/Lion Onesie.json"
-	if !utils.FleExists( filePath) {
+	filePath := t.BaseFolder + "/config.json"
+	if !utils.FleExists(filePath) {
 		t.Config = &TraitManagerConfig{
 			Normal:    100,
 			Rare:      25,

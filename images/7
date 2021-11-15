@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Scythe Handle",
+			"value": "Death Grip"
+		},
+		{
+			"trait_type": "Scythe Blade",
+			"value": "Hell Scythe"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Smoke"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Thunderous"
+		},
+		{
+			"trait_type": "Accessory 1",
+			"value": "Daybreak Cap"
+		},
+		{
+			"trait_type": "Shoes",
+			"value": "YUKI 540"
+		},
+		{
+			"trait_type": "Cloak",
+			"value": "Great Wave"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Punky Violet Glow"
+		}
+	],
+	"image": "IPFS_URL/7.png",
+	"name": "Grand Reaper Neo"
+}

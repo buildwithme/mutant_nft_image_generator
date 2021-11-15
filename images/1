@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Scythe Handle",
+			"value": "Ring Bearer"
+		},
+		{
+			"trait_type": "Scythe Blade",
+			"value": "Bloodstained Gold"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Crooked"
+		},
+		{
+			"trait_type": "Accessory",
+			"value": "Demon Inferno Cap"
+		},
+		{
+			"trait_type": "Shoes",
+			"value": "Black Gummy"
+		},
+		{
+			"trait_type": "Cloak",
+			"value": "Red Magma"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Vegas Inverted Logo Black"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Red Inferno"
+		}
+	],
+	"image": "IPFS_URL/1.png",
+	"name": "Grand Reaper Cryp"
+}

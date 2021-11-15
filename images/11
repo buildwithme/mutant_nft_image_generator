@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Scythe Handle",
+			"value": "Pink Chains Extended"
+		},
+		{
+			"trait_type": "Scythe Blade",
+			"value": "Skinny"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Demon"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Ilysm"
+		},
+		{
+			"trait_type": "Accessory 1",
+			"value": "Baby Horns"
+		},
+		{
+			"trait_type": "Accessory 2",
+			"value": "White Cat Headphones"
+		},
+		{
+			"trait_type": "Shoes",
+			"value": "High-tops White"
+		},
+		{
+			"trait_type": "Cloak",
+			"value": "Racing Suit"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Pastel Pink Glow"
+		}
+	],
+	"image": "IPFS_URL/11.png",
+	"name": "Grand Reaper Smith"
+}

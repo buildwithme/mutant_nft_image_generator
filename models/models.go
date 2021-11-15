@@ -1,7 +1,6 @@
 package models
 
-
-const configFileName = "Lion Onesie.json"
+const configFileName = "config.json"
 
 type TraitType int
 

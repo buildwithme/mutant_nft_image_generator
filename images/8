@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Scythe Handle",
+			"value": "Ring Bearer"
+		},
+		{
+			"trait_type": "Scythe Blade",
+			"value": "Burning Gold"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Gold Brute Fang"
+		},
+		{
+			"trait_type": "Accessory 1",
+			"value": "Burning Halo"
+		},
+		{
+			"trait_type": "Accessory 2",
+			"value": "Heated VR Headset"
+		},
+		{
+			"trait_type": "Shoes",
+			"value": "Inferno Sneakers"
+		},
+		{
+			"trait_type": "Cloak",
+			"value": "Caution"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Light Yellow Glow"
+		}
+	],
+	"image": "IPFS_URL/8.png",
+	"name": "Grand Reaper Nyx"
+}

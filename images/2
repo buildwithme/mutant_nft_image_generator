@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Scythe Handle",
+			"value": "Brand New"
+		},
+		{
+			"trait_type": "Scythe Blade",
+			"value": "Gold Glitter"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Perfect Bite"
+		},
+		{
+			"trait_type": "Accessory",
+			"value": "White Headphones"
+		},
+		{
+			"trait_type": "Shoes",
+			"value": "High-tops White"
+		},
+		{
+			"trait_type": "Cloak",
+			"value": "Galaxy"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Light Pink Glow"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Starstruck"
+		}
+	],
+	"image": "IPFS_URL/2.png",
+	"name": "Grand Reaper Gamerbae"
+}
