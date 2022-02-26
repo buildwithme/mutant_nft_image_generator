@@ -16,11 +16,12 @@ type Trait struct {
 	FolderName    string         `json:"folderName"`
 	BasePath      string         `json:"basePath"`
 }
-func (t *Trait) GetTraitsByType(traitTypeToUse TraitType, include, exclude []string) []*SingleTrait{
+
+func (t *Trait) GetTraitsByType(traitTypeToUse TraitType, include, exclude []string) []*SingleTrait {
 	var traitsToReturn []*SingleTrait
 	for _, traitValue := range t.Traits {
 		if traitValue.TraitType == traitTypeToUse && !utils.ExistIn(traitValue.Name, exclude) &&
-			(len(include) == 0 || utils.ExistIn(traitValue.Name, include)){
+			(len(include) == 0 || utils.ExistIn(traitValue.Name, include)) {
 			traitsToReturn = append(traitsToReturn, traitValue)
 		}
 	}
@@ -34,20 +35,31 @@ func (t *Trait) GetTraitsByType(traitTypeToUse TraitType, include, exclude []str
 	}
 	return traitsToReturn
 }
+func (t *Trait) GetTraitsFiltered(include, exclude []string) []*SingleTrait {
+	var traitsToReturn []*SingleTrait
+	for _, traitValue := range t.Traits {
+		if !utils.ExistIn(traitValue.Name, exclude) &&
+			(len(include) == 0 || utils.ExistIn(traitValue.Name, include)) {
+			traitsToReturn = append(traitsToReturn, traitValue)
+		}
+	}
+	return traitsToReturn
+}
+
 type TraitConfig struct {
-	Normal    int      `json:"normal"`
-	Rare      int      `json:"rare"`
-	SuperRare int      `json:"superRare"`
-	Count     int      `json:"count"` //  number of traits of same type that can be picked
-	Include   []string `json:"include"`
-	Exclude   []string `json:"exclude"`
-	ExcludeSingle   map[string][]string `json:"excludeSingle"`
-	IncludeSingle   map[string][]string `json:"includeSingle"`
-	Required bool `json:"required"`
+	Normal        int                 `json:"normal"`
+	Rare          int                 `json:"rare"`
+	SuperRare     int                 `json:"superRare"`
+	Count         int                 `json:"count"` //  number of traits of same type that can be picked
+	Include       []string            `json:"include"`
+	Exclude       []string            `json:"exclude"`
+	ExcludeSingle map[string][]string `json:"excludeSingle"`
+	IncludeSingle map[string][]string `json:"includeSingle"`
+	Required      bool                `json:"required"`
 }
 
 func NewTraitConfigFrom(path string) *TraitConfig {
-	if !utils.FleExists( path) {
+	if !utils.FleExists(path) {
 		return &TraitConfig{
 			Normal:        100,
 			Rare:          25,
@@ -55,8 +67,8 @@ func NewTraitConfigFrom(path string) *TraitConfig {
 			Count:         0,
 			Include:       nil,
 			Exclude:       nil,
-			ExcludeSingle: make( map[string][]string),
-			IncludeSingle: make( map[string][]string),
+			ExcludeSingle: make(map[string][]string),
+			IncludeSingle: make(map[string][]string),
 			Required:      false,
 		}
 	}

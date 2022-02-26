@@ -17,9 +17,21 @@ import (
 	"github.com/nfnt/resize"
 )
 
-var cacheCounter int
-var cacheImage = make(map[string]int)
-var imageIndex = make(map[int]image.Image)
+type Cache struct {
+	mu           sync.Mutex
+	cacheImage   map[string]int
+	imageIndex   map[int]image.Image
+	cacheCounter int
+}
+
+func NewCache() *Cache {
+	return &Cache{
+		cacheImage: make(map[string]int),
+		imageIndex: make(map[int]image.Image),
+	}
+}
+
+var cache *Cache = NewCache()
 
 type Hashes struct {
 	mu            sync.Mutex
@@ -97,17 +109,20 @@ func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 	c.Paths = append(c.Paths, imagePath)
 
 	var counter int
-	if indexImage, ok := cacheImage[imagePath]; ok {
+	cache.mu.Lock()
+	if indexImage, ok := cache.cacheImage[imagePath]; ok {
 		counter = indexImage
 	} else {
 		sourceImage := getImage(imagePath)
 		sourceImageFinal := resize.Resize(2048, 2048, sourceImage, resize.Lanczos3)
-		cacheImage[imagePath] = cacheCounter
-		imageIndex[cacheCounter] = sourceImageFinal
-		counter = cacheCounter
-		cacheCounter++
+		cache.cacheImage[imagePath] = cache.cacheCounter
+		cache.imageIndex[cache.cacheCounter] = sourceImageFinal
+		counter = cache.cacheCounter
+		cache.cacheCounter++
 	}
+	cache.mu.Unlock()
 
+	SavedTraits.mu.Lock()
 	if !SavedTraits.Exists(c.id) {
 		SavedTraits.Data[c.id] = make(map[int]TraitSavedConf)
 	}
@@ -117,13 +132,16 @@ func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 		TraitType: trait.Name,
 		Path:      imagePath,
 	}
+	SavedTraits.mu.Unlock()
 	c.images = append(c.images, counter)
 }
 
 func (c *ImageCreator) Process() *image.RGBA {
 
 	for i, imageSourceIndex := range c.images {
+		SavedTraits.mu.Lock()
 		traitConfig := SavedTraits.Data[c.id]
+		SavedTraits.mu.Unlock()
 		if len(c.ExcludeTraits) > 0 && utils.ExistIn(traitConfig[imageSourceIndex].TraitType, c.ExcludeTraits) {
 			delete(traitConfig, imageSourceIndex)
 			continue
@@ -132,7 +150,6 @@ func (c *ImageCreator) Process() *image.RGBA {
 			delete(traitConfig, imageSourceIndex)
 			continue
 		}
-
 		if len(c.ExcludeSingleTraits) > 0 && utils.ExistSingleIn(traitConfig[imageSourceIndex].TraitType, traitConfig[imageSourceIndex].Value, c.ExcludeSingleTraits) {
 			delete(traitConfig, imageSourceIndex)
 			continue
@@ -141,8 +158,9 @@ func (c *ImageCreator) Process() *image.RGBA {
 			delete(traitConfig, imageSourceIndex)
 			continue
 		}
-		imageSource := imageIndex[imageSourceIndex]
-
+		cache.mu.Lock()
+		imageSource := cache.imageIndex[imageSourceIndex]
+		cache.mu.Unlock()
 		drawType := draw.Src
 		if i != 0 {
 			drawType = draw.Over
@@ -156,7 +174,9 @@ func (c *ImageCreator) Process() *image.RGBA {
 }
 
 func (c ImageCreator) IsHashValid() bool {
+	SavedTraits.mu.Lock()
 	var trait = SavedTraits.Data[c.id]
+	SavedTraits.mu.Unlock()
 	var paths []string
 
 	var keys []int
@@ -177,7 +197,9 @@ func (c ImageCreator) IsHashValid() bool {
 	SavedHashes.mu.Lock()
 	if _, ok := SavedHashes.CurrentHashes[hash]; ok {
 		SavedHashes.mu.Unlock()
+		SavedTraits.mu.Lock()
 		delete(SavedTraits.Data, c.id)
+		SavedTraits.mu.Unlock()
 		return false
 	} else {
 		SavedHashes.CurrentHashes[hash] = true
@@ -197,7 +219,9 @@ func (c ImageCreator) WriteTo(outputPath string) {
 	}
 	jpeg.Encode(finalImageOutput, c.final, &jpeg.Options{jpeg.DefaultQuality})
 	finalImageOutput.Close()
+	SavedTraits.mu.Lock()
 	SavedTraits.TraitSavedCount++
+	SavedTraits.mu.Unlock()
 }
 
 func getImage(imagePath string) image.Image {

@@ -1,0 +1,6 @@
+{
+  "normal": 100,
+  "rare": 30,
+  "superRare": 5,
+  "exclude": ["Eyes", "Mouth"]
+}

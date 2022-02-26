@@ -1,0 +1,14 @@
+{
+  "exclude": ["Mask"],
+  "excludeSingle": {
+    "Mouth": [
+      "Blood Soul",
+      "Lost Soul",
+      "Smoke Cloud",
+      "Smoke Rings",
+      "Smoke Stack",
+      "Smoke"
+    ],
+    "Eyes": ["Heated VR Headset", "White VR Headset", "Black VR Headset"]
+  }
+}

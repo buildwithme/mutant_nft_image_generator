@@ -12,62 +12,34 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 
 	"github.com/zenthangplus/goccm"
 )
 
+var counterMu sync.Mutex
 var counter int64
 
 func getRandom(max int) int {
+	counterMu.Lock()
 	rand.Seed(time.Now().UnixNano() + counter)
 	number := rand.Intn(max)
 	counter++
+	counterMu.Unlock()
 	return number
 }
 func main() {
-
-	// Original_Path := "GeeksforGeeks.txt"
-	// New_Path := "gfg.txt"
-	// e := os.Rename(Original_Path, New_Path)
-	// if e != nil {
-	// 	log.Fatal(e)
-	// }
-
-	for i := 12; i <= 1000; i++ {
-		body := utils.ReadAll("output/metadata/" + strconv.Itoa(i))
-
-		m := make(map[string]interface{})
-		err := json.Unmarshal(body, &m)
-		if err != nil {
-			log.Panic(err)
-		}
-
-		m["name"] = "Reaper " + strconv.Itoa(i)
-		m["image"] = "http://cloudflare-ipfs.com/ipfs/QmaEq68rKoYz7DCVN7qk8qffEZFxufVYHcycVgxiiwzjdt/" + strconv.Itoa(i) + ".png"
-
-		body, err = json.MarshalIndent(m, "", "\t")
-		if err != nil {
-			fmt.Println(err)
-		}
-		err = ioutil.WriteFile("output/metadata/"+strconv.Itoa(i), body, 0777)
-		if err != nil {
-			fmt.Println("Error creating", "data"+strconv.Itoa(i+1))
-			fmt.Println(err)
-			return
-		}
-	}
-
-	// processor()
+	processor()
 }
 
 func processor() {
 	var n int = 100
 	//argsWithProg := os.Args
 	argsWithoutProg := os.Args[1:]
-	argsWithoutProg = []string{
-		"1001",
+	if len(argsWithoutProg) == 0 {
+		argsWithoutProg = []string{strconv.Itoa(n)}
 	}
 
 	if len(argsWithoutProg) > 0 {
@@ -78,7 +50,7 @@ func processor() {
 		}
 	}
 
-	execute("images", "layers", n)
+	execute("images", "layers_2", n)
 }
 func execute(outputFolder, inputFolder string, n int) {
 	baseOutput := "output"
@@ -93,7 +65,22 @@ func execute(outputFolder, inputFolder string, n int) {
 	traits.AddAll()
 
 	// Limit x goroutines to run concurrently.
-	c := goccm.New(1)
+	c := goccm.New(50)
+
+	var mu sync.Mutex
+	var unusedTraits = make(map[string]map[int]struct{})
+
+	for key, value := range traits.Traits {
+		if _, ok := unusedTraits[key]; !ok {
+			unusedTraits[key] = make(map[int]struct{})
+		}
+		for singleKey := range value.Traits {
+			if _, ok := unusedTraits[key]; !ok {
+				unusedTraits[key] = make(map[int]struct{})
+			}
+			unusedTraits[key][singleKey] = struct{}{}
+		}
+	}
 
 	var counter uint64
 	traitKeys := traits.GetTraitKeys()
@@ -103,12 +90,18 @@ func execute(outputFolder, inputFolder string, n int) {
 		go func(i int) {
 			defer c.Done()
 
+			mu.Lock()
+			pickedUniqueSingleTrait := len(unusedTraits) == 0
+			mu.Unlock()
+
 			fmt.Printf("%s - %d\n", inputFolder, i)
 			imageCreator := models.NewImageCreator(i)
 
 			for _, keyNumber := range traitKeys {
 				key := traits.Mapping[keyNumber]
 				trait := traits.Traits[key]
+
+				// fmt.Printf("%s - %d layer [%s]\n", inputFolder, i, key)
 
 				if trait.TraitConfig != nil && len(trait.TraitConfig.Exclude) > 0 && len(trait.TraitConfig.Include) > 0 {
 					utils.Fatal(errors.New("include and exclude defined"))
@@ -121,7 +114,11 @@ func execute(outputFolder, inputFolder string, n int) {
 							continue
 						}
 					} else if trait.MainTraitType == models.TraitRare {
-						if traitTypeNumber > traits.Config.Rare*100 {
+						rareConfig := traits.Config.Rare
+						if key == "Accessory 2" {
+							rareConfig = 50
+						}
+						if traitTypeNumber > rareConfig*100 {
 							continue
 						}
 					}
@@ -171,13 +168,36 @@ func execute(outputFolder, inputFolder string, n int) {
 				} else {
 					traitTypeToUse = models.TraitSuperRare
 				}
+				var traitsToUSe []*models.SingleTrait
+				var randomTraitNumber int
 
-				traitsToUSe := trait.GetTraitsByType(traitTypeToUse, imageCreator.IncludeSingleTraits[trait.Name], imageCreator.ExcludeSingleTraits[trait.Name])
+				if !pickedUniqueSingleTrait {
+					traitsToUSe = trait.GetTraitsFiltered(imageCreator.IncludeSingleTraits[trait.Name], imageCreator.ExcludeSingleTraits[trait.Name])
+				} else {
+					traitsToUSe = trait.GetTraitsByType(traitTypeToUse, imageCreator.IncludeSingleTraits[trait.Name], imageCreator.ExcludeSingleTraits[trait.Name])
+
+				}
 				n := len(traitsToUSe)
 				if n == 0 {
 					continue
 				}
-				randomTraitNumber := getRandom(n)
+				if !pickedUniqueSingleTrait {
+					mu.Lock()
+					if len(unusedTraits[key]) > 0 {
+						for kk := range unusedTraits[key] {
+							randomTraitNumber = kk
+							delete(unusedTraits[key], kk)
+							if len(unusedTraits[key]) == 0 {
+								delete(unusedTraits, key)
+							}
+							pickedUniqueSingleTrait = true
+							break
+						}
+					}
+					mu.Unlock()
+				} else {
+					randomTraitNumber = getRandom(n)
+				}
 
 				choosedTrait := traitsToUSe[randomTraitNumber]
 				imageCreator.Add(trait, choosedTrait)
@@ -198,23 +218,89 @@ func execute(outputFolder, inputFolder string, n int) {
 				return
 			}
 			atomic.AddUint64(&counter, 1)
-			imageCreator.WriteTo(fmt.Sprintf(baseOutput+"/%s/%d.png", outputFolder, i))
+			imageCreator.WriteTo(fmt.Sprintf(baseOutput+"/%s/%d.png", outputFolder, i+1))
 		}(index)
 	}
 
 	time.Sleep(1000)
 	c.WaitAllDone()
 
-	utils.PrintJson(models.SavedTraits)
+	// utils.PrintJson(models.SavedTraits)
 
-	m := generateOsMetadata(models.SavedTraits.Data)
-	utils.PrintJson(m)
-	writeToFile("output/all_metadata.json", m)
+	m := generateImxMetadata(models.SavedTraits.Data, n)
+	// utils.PrintJson(m)
+	writeToFile("output/all_metadata_IMX", m)
+
+	m = generateOsMetadata(models.SavedTraits.Data, n)
+	// utils.PrintJson(m)
+	writeToFile("output/all_metadata_OS", m)
+
+	rez := make(map[string]map[string]int)
+	rez = rez
+	for i := 0; i < len(m); i++ {
+		elem := m[i]["attributes"].([]map[string]interface{})
+		for j := 0; j < len(elem); j++ {
+			attribute := elem[j]
+			attribute = attribute
+
+			traitType := attribute["trait_type"].(string)
+			value := attribute["value"].(string)
+			if _, ok := rez[traitType]; !ok {
+				rez[traitType] = make(map[string]int)
+			}
+			rez[traitType][value]++
+		}
+	}
+	body, err := json.MarshalIndent(rez, "", "\t")
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = ioutil.WriteFile("output/rarity.json", body, 0777)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+func generateImxMetadata(datas map[int]map[int]models.TraitSavedConf, n int) []map[string]interface{} {
+	createDir("output/metadata_IMX")
+	var metadata []map[string]interface{}
+	for i := 0; i < n; i++ {
+		key := datas[i]
+		tokenID := strconv.Itoa(i + 1)
+
+		var meta = make(map[string]interface{})
+
+		meta["name"] = "Reaper " + tokenID
+		meta["image"] = "IPFS_URL/" + tokenID + ".png"
+
+		for _, val := range key {
+
+			val.Value = strings.ReplaceAll(val.Value, "_sr.png", "")
+			val.Value = strings.ReplaceAll(val.Value, "_r.png", "")
+			val.Value = strings.ReplaceAll(val.Value, ".png", "")
+			meta[val.TraitType] = val.Value
+		}
+
+		metadata = append(metadata, meta)
+
+		body, err := json.MarshalIndent(meta, "", "\t")
+		if err != nil {
+			fmt.Println(err)
+		}
+		err = ioutil.WriteFile("output/metadata_IMX/"+tokenID, body, 0777)
+		if err != nil {
+			fmt.Println("Error creating", "data"+strconv.Itoa(i+1))
+			fmt.Println(err)
+		}
+	}
+
+	return metadata
 }
 
-func generateOsMetadata(datas map[int]map[int]models.TraitSavedConf) []map[string]interface{} {
+func generateOsMetadata(datas map[int]map[int]models.TraitSavedConf, n int) []map[string]interface{} {
+	createDir("output/metadata_OS")
 	var metadata []map[string]interface{}
-	for i := 0; i < 1001; i++ {
+	for i := 0; i < n; i++ {
 		key := datas[i]
 		tokenID := strconv.Itoa(i + 1)
 
@@ -240,7 +326,7 @@ func generateOsMetadata(datas map[int]map[int]models.TraitSavedConf) []map[strin
 		if err != nil {
 			fmt.Println(err)
 		}
-		err = ioutil.WriteFile("output/metadata/"+tokenID, body, 0777)
+		err = ioutil.WriteFile("output/metadata_OS/"+tokenID, body, 0777)
 		if err != nil {
 			fmt.Println("Error creating", "data"+strconv.Itoa(i+1))
 			fmt.Println(err)
@@ -261,14 +347,7 @@ func writeToFile(name string, metadata []map[string]interface{}) {
 		return
 	}
 
-	err = os.Mkdir(name, os.ModeDir)
-	if err != nil {
-		fmt.Println(err)
-	}
-	err = os.Chmod(name, os.ModePerm)
-	if err != nil {
-		fmt.Println(err)
-	}
+	createDir(name)
 	for i, m := range metadata {
 
 		body, err := json.MarshalIndent(m, "", "\t")
@@ -281,6 +360,16 @@ func writeToFile(name string, metadata []map[string]interface{}) {
 			fmt.Println(err)
 			return
 		}
+	}
+}
+func createDir(name string) {
+	err := os.Mkdir(name, os.ModeDir)
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = os.Chmod(name, os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
 	}
 }
 

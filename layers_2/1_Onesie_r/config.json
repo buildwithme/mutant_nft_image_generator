@@ -1,0 +1,6 @@
+{
+  "normal": 100,
+  "rare": 20,
+  "superRare": 3,
+  "exclude": ["Cloak", "Accessory 1", "Accessory 2"]
+}

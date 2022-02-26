@@ -1,0 +1,5 @@
+Mask = no eyes, no mouth
+Onesie = no accessories
+
+VR headset eyes above mouth
+Bubblegum mouth above eyes
