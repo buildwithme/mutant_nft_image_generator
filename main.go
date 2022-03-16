@@ -35,7 +35,7 @@ func main() {
 }
 
 func processor() {
-	var n int = 100
+	var n int = 500
 	//argsWithProg := os.Args
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) == 0 {
@@ -50,7 +50,7 @@ func processor() {
 		}
 	}
 
-	execute("images", "layers_2", n)
+	execute("_3heads", "layers_3heads", n)
 }
 func execute(outputFolder, inputFolder string, n int) {
 	baseOutput := "output"
@@ -227,11 +227,7 @@ func execute(outputFolder, inputFolder string, n int) {
 
 	// utils.PrintJson(models.SavedTraits)
 
-	m := generateImxMetadata(models.SavedTraits.Data, n)
-	// utils.PrintJson(m)
-	writeToFile("output/all_metadata_IMX", m)
-
-	m = generateOsMetadata(models.SavedTraits.Data, n)
+	m := generateOsMetadata(models.SavedTraits.Data, n)
 	// utils.PrintJson(m)
 	writeToFile("output/all_metadata_OS", m)
 
@@ -260,41 +256,6 @@ func execute(outputFolder, inputFolder string, n int) {
 		fmt.Println(err)
 		return
 	}
-}
-func generateImxMetadata(datas map[int]map[int]models.TraitSavedConf, n int) []map[string]interface{} {
-	createDir("output/metadata_IMX")
-	var metadata []map[string]interface{}
-	for i := 0; i < n; i++ {
-		key := datas[i]
-		tokenID := strconv.Itoa(i + 1)
-
-		var meta = make(map[string]interface{})
-
-		meta["name"] = "Reaper " + tokenID
-		meta["image"] = "IPFS_URL/" + tokenID + ".png"
-
-		for _, val := range key {
-
-			val.Value = strings.ReplaceAll(val.Value, "_sr.png", "")
-			val.Value = strings.ReplaceAll(val.Value, "_r.png", "")
-			val.Value = strings.ReplaceAll(val.Value, ".png", "")
-			meta[val.TraitType] = val.Value
-		}
-
-		metadata = append(metadata, meta)
-
-		body, err := json.MarshalIndent(meta, "", "\t")
-		if err != nil {
-			fmt.Println(err)
-		}
-		err = ioutil.WriteFile("output/metadata_IMX/"+tokenID, body, 0777)
-		if err != nil {
-			fmt.Println("Error creating", "data"+strconv.Itoa(i+1))
-			fmt.Println(err)
-		}
-	}
-
-	return metadata
 }
 
 func generateOsMetadata(datas map[int]map[int]models.TraitSavedConf, n int) []map[string]interface{} {
