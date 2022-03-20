@@ -1,0 +1,12 @@
+{
+  "exclude": [
+   "eyes"
+  ],
+  "includeSingle": {
+    "mouth": [
+      "Diamond-TeethRightHead",
+      "FANGSRightHead",
+      "ZipperedRightHead"
+    ]
+  }
+}

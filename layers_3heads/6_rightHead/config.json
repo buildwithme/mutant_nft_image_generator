@@ -1,0 +1,12 @@
+{
+  "normal": 70,
+  "rare": 25,
+  "superRare": 5,
+  "excludeSingle": {
+    "mouth": [
+      "Diamond-TeethRightHead",
+      "FANGSRightHead",
+      "ZipperedRightHead"
+    ]
+  }
+}

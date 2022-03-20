@@ -52,7 +52,6 @@ func GetExtension(name string) string {
 	return name[index:]
 }
 
-
 func FleExists(filename string) bool {
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {
@@ -61,13 +60,22 @@ func FleExists(filename string) bool {
 	return !info.IsDir()
 }
 
-func ExistIn(name string, names[]string) bool {
+func ExistIn(name string, names []string) bool {
 	for _, nameValue := range names {
 		if name == nameValue {
 			return true
 		}
 	}
 	return false
+}
+
+func RemoveFromList(name string, names []string) (result []string) {
+	for _, nameValue := range names {
+		if name != nameValue {
+			result = append(result, nameValue)
+		}
+	}
+	return
 }
 
 func ExistSingleIn(traitType, traitValue string, names map[string][]string) bool {
