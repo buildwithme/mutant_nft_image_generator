@@ -1,0 +1,9 @@
+{
+  "excludeSingle": {
+    "mouth": [
+      "Diamond-TeethRightHead",
+      "FANGSRightHead",
+      "ZipperedRightHead"
+    ]
+  }
+}

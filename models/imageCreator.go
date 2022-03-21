@@ -43,9 +43,10 @@ var SavedHashes *Hashes = &Hashes{
 }
 
 type TraitSavedConf struct {
-	Value     string `json:"value"`
-	TraitType string `json:"trait_type"`
-	Path      string `json:"path"`
+	Value      string    `json:"value"`
+	TraitType  string    `json:"trait_type"`
+	Path       string    `json:"path"`
+	RarityType TraitType `json:"rarityTpe"`
 }
 
 // SafeCounter is safe to use concurrently.
@@ -128,9 +129,10 @@ func (c *ImageCreator) Add(trait Trait, choosedType *SingleTrait) {
 	}
 
 	SavedTraits.Data[c.id][counter] = TraitSavedConf{
-		Value:     choosedType.Name,
-		TraitType: trait.Name,
-		Path:      imagePath,
+		Value:      choosedType.Name,
+		TraitType:  trait.Name,
+		Path:       imagePath,
+		RarityType: choosedType.TraitType,
 	}
 	SavedTraits.mu.Unlock()
 	c.images = append(c.images, counter)

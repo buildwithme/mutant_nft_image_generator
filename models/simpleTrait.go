@@ -57,7 +57,7 @@ func (t *SingleTrait) Configure() {
 }
 func (t *SingleTrait) ConfigFile() {
 	filePath := t.GetConfigFileName()
-	if !utils.FleExists( filePath) {
+	if !utils.FleExists(filePath) {
 		t.Config = &SingleTraitConfig{
 			Include:       nil,
 			Exclude:       nil,
@@ -84,8 +84,8 @@ func (t *SingleTrait) GetConfigFileName() string {
 }
 
 type SingleTraitConfig struct {
-	Include       []string          `json:"include"`
-	Exclude       []string          `json:"exclude"`
+	Include       []string            `json:"include"`
+	Exclude       []string            `json:"exclude"`
 	IncludeSingle map[string][]string `json:"includeSingle"`
 	ExcludeSingle map[string][]string `json:"excludeSingle"`
 }

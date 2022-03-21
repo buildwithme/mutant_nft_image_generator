@@ -10,6 +10,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -35,7 +36,7 @@ func main() {
 }
 
 func processor() {
-	var n int = 1000
+	var n int = 20
 	//argsWithProg := os.Args
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) == 0 {
@@ -51,11 +52,38 @@ func processor() {
 	}
 
 	execute("3 Head", "_3heads", "layers_3heads", n)
-	// execute("Clawdia", "_clawdia", "layers_Clawdia", n)
+	execute("Clawdia", "_clawdia", "layers_Clawdia", n)
+
+	err := utils.EnsureDir(baseOutput + "/final/images")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = utils.EnsureDir(baseOutput + "/final/metadata")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var counter = 1
+
+	var folders = []string{"_3heads", "_clawdia"}
+	for _, folderOutput := range folders {
+		for i := 1; i <= n; i++ {
+			copyFile(fmt.Sprintf("%s/%s/finalImages/%d.png", baseOutput, folderOutput, i),
+				fmt.Sprintf("%s/final/images/%d.png", baseOutput, counter))
+			copyFile(fmt.Sprintf("%s/%s/metadata_OS/%d", baseOutput, folderOutput, i),
+				fmt.Sprintf("%s/final/metadata/%d", baseOutput, counter))
+			counter++
+		}
+	}
 }
+
+var baseOutput = "output"
+
 func execute(name, outputFolder, inputFolder string, n int) {
-	baseOutput := "output"
 	err := utils.EnsureDir(baseOutput + "/" + outputFolder + "/images")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = utils.EnsureDir(baseOutput + "/" + outputFolder + "/finalImages")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -67,7 +95,7 @@ func execute(name, outputFolder, inputFolder string, n int) {
 	traits.AddAll()
 
 	// Limit x goroutines to run concurrently.
-	c := goccm.New(1)
+	c := goccm.New(50)
 
 	var mu sync.Mutex
 	var unusedTraits = make(map[string]map[int]struct{})
@@ -122,9 +150,6 @@ func execute(name, outputFolder, inputFolder string, n int) {
 						}
 					}
 				}
-				if key == "rightHead" {
-					fmt.Print()
-				}
 
 				if len(imageCreator.ExcludeTraits) > 0 && utils.ExistIn(trait.Name, imageCreator.ExcludeTraits) {
 					continue
@@ -172,9 +197,6 @@ func execute(name, outputFolder, inputFolder string, n int) {
 				}
 				var traitsToUSe []*models.SingleTrait
 				var randomTraitNumber int
-				if key == "rightHead" {
-					traitTypeToUse = models.TraitSuperRare
-				}
 
 				if !pickedUniqueSingleTrait {
 					traitsToUSe = trait.GetTraitsFiltered(imageCreator.IncludeSingleTraits[trait.Name], imageCreator.ExcludeSingleTraits[trait.Name])
@@ -200,18 +222,15 @@ func execute(name, outputFolder, inputFolder string, n int) {
 						}
 					}
 					mu.Unlock()
-				} else if key == "Background" {
-					randomTraitNumber = getRandom(n)
 				} else {
 					randomTraitNumber = getRandom(n)
 				}
 
-				choosedTrait := traitsToUSe[randomTraitNumber]
-				if key == "rightHead" {
+				var choosedTrait *models.SingleTrait
+				if len(traitsToUSe)-1 < randomTraitNumber {
 					choosedTrait = traitsToUSe[len(traitsToUSe)-1]
-				}
-				if key == "mouth" {
-					choosedTrait = traitsToUSe[len(traitsToUSe)-1]
+				} else {
+					choosedTrait = traitsToUSe[randomTraitNumber]
 				}
 				imageCreator.Add(trait, choosedTrait)
 				if choosedTrait.Config != nil {
@@ -244,9 +263,10 @@ func execute(name, outputFolder, inputFolder string, n int) {
 	time.Sleep(1000)
 	c.WaitAllDone()
 
-	m := generateOsMetadata(name, outputFolder, models.SavedTraits.Data, n)
+	models.SavedTraits.Data = randomizeMap(models.SavedTraits.Data, n, outputFolder)
 
-	rez := make(map[string]map[string]int)
+	m := generateOsMetadata(name, outputFolder, models.SavedTraits.Data, n)
+	rarity := make(map[string]map[string]int)
 	for i := 0; i < len(m); i++ {
 		elem := m[i]["attributes"].([]map[string]interface{})
 		for j := 0; j < len(elem); j++ {
@@ -254,14 +274,134 @@ func execute(name, outputFolder, inputFolder string, n int) {
 
 			traitType := attribute["trait_type"].(string)
 			value := attribute["value"].(string)
-			if _, ok := rez[traitType]; !ok {
-				rez[traitType] = make(map[string]int)
+			if _, ok := rarity[traitType]; !ok {
+				rarity[traitType] = make(map[string]int)
 			}
-			rez[traitType][value]++
+			rarity[traitType][value]++
 		}
 	}
-	writeToSimpleFile("output/"+outputFolder+"/rarity.json", rez)
+	writeToSimpleFile("output/"+outputFolder+"/rarity.json", rarity)
 	writeToFile("output/"+outputFolder+"/all_metadata_OS", m)
+
+	idByRarity := make([]RarityScore, n)
+	for i := 0; i < len(m); i++ {
+		idStr := strings.ReplaceAll(m[i]["name"].(string), "3 Head ", "")
+		idValue, _ := strconv.ParseInt(idStr, 10, 16)
+
+		var rs RarityScore
+
+		rs.Id = int(idValue)
+
+		elem := m[i]["attributes"].([]map[string]interface{})
+		for j := 0; j < len(elem); j++ {
+			attribute := elem[j]
+
+			traitType := attribute["trait_type"].(string)
+			value := attribute["value"].(string)
+			scoreRarity := rarity[traitType][value]
+
+			var count int
+			for _, v := range rarity[traitType] {
+				count += v
+			}
+
+			rs.Score += float32((float32(scoreRarity) / float32(count)) * 100)
+		}
+
+		idByRarity[i] = rs
+	}
+
+	generateRarity(outputFolder, models.SavedTraits.Data, n)
+
+	// Sort by age, keeping original order or equal elements.
+	sort.SliceStable(idByRarity, func(i, j int) bool {
+		return idByRarity[i].Score > idByRarity[j].Score
+	})
+	utils.PrintJson(idByRarity)
+}
+
+type RarityStruct struct {
+	Name       string                   `json:"name"`
+	RarityType map[models.TraitType]int `json:"rarityType"`
+}
+
+type RarityScore struct {
+	Id    int     `json="id"`
+	Score float32 `json="score`
+}
+
+func generateRarity(outputFolder string, datas map[int]map[int]models.TraitSavedConf, n int) {
+	var rarities = make(map[string]map[models.TraitType]int)
+	var rarestItems []RarityScore
+	for i := 0; i < n; i++ {
+		key := datas[i]
+		for _, val := range key {
+			if rarities[val.TraitType] == nil {
+				rarities[val.TraitType] = make(map[models.TraitType]int)
+			}
+			rarities[val.TraitType][val.RarityType]++
+		}
+	}
+	utils.PrintJson(rarities)
+	writeToSimpleFile("output/"+outputFolder+"/rarestItems.json", rarities)
+	for i := 0; i < n; i++ {
+		id := i + 1
+		key := datas[i]
+		var score float32
+		for _, val := range key {
+			rarities[val.TraitType][val.RarityType]++
+			score += (1 / float32(rarities[val.TraitType][val.RarityType]))
+		}
+		rarestItems = append(rarestItems, RarityScore{
+			Id:    id,
+			Score: score,
+		})
+	}
+	// Sort by age, keeping original order or equal elements.
+	sort.SliceStable(rarestItems, func(i, j int) bool {
+		return rarestItems[i].Score > rarestItems[j].Score
+	})
+	writeToSimpleFile("output/"+outputFolder+"/rarestItems.json", rarestItems)
+}
+
+func randomizeMap(datas map[int]map[int]models.TraitSavedConf, n int, outputFolder string) (rez map[int]map[int]models.TraitSavedConf) {
+	var ids []int
+
+	for i := 0; i < n; i++ {
+		ids = append(ids, i)
+	}
+
+	removeId := func(i int) {
+		ids[i] = ids[len(ids)-1]
+		ids = ids[:len(ids)-1]
+	}
+
+	rez = make(map[int]map[int]models.TraitSavedConf)
+
+	for i := 0; i < n; i++ {
+		id := getRandom(len(ids))
+		idFinal := ids[id]
+		removeId(id)
+		rez[i] = datas[idFinal]
+		copyFile(fmt.Sprintf("%s/%s/images/%d.png", baseOutput, outputFolder, idFinal+1),
+			fmt.Sprintf("%s/%s/finalImages/%d.png", baseOutput, outputFolder, i+1))
+	}
+	return
+}
+
+func copyFile(sourceFile, destinationFile string) {
+	input, err := ioutil.ReadFile(sourceFile)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = ioutil.WriteFile(destinationFile, input, 0644)
+	if err != nil {
+		fmt.Println("Error creating", destinationFile)
+		fmt.Println(err)
+		return
+	}
 }
 
 func generateOsMetadata(name, folder string, datas map[int]map[int]models.TraitSavedConf, n int) []map[string]interface{} {

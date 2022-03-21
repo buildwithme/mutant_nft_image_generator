@@ -2,11 +2,13 @@
   "exclude": [
    "eyes"
   ],
-  "includeSingle": {
+  "excludeSingle": {
     "mouth": [
-      "Diamond-TeethRightHead",
-      "FANGSRightHead",
-      "ZipperedRightHead"
+      "Diamond-Teeth_sr.png",
+      "Diamond-Teeth_sr",
+      "Diamond-Teeth",
+      "FANGS",
+      "Zippered"
     ]
   }
 }
