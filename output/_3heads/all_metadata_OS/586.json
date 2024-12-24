@@ -1,0 +1,34 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Diamond-TeethRightHead"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Minecraft-Steve"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Blue"
+		}
+	],
+	"image": "IPFS_URL/586.png",
+	"name": "3 Head 586"
+}
