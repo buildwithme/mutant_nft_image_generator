@@ -1,9 +1,9 @@
 {
   "exclude": [
-   "eyes"
+   "Eyes"
   ],
   "excludeSingle": {
-    "mouth": [
+    "Mouth": [
       "Diamond-Teeth_sr.png",
       "Diamond-Teeth_sr",
       "Diamond-Teeth",

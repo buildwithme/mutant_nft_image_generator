@@ -31,15 +31,9 @@ func NewCache() *Cache {
 	}
 }
 
-var cache *Cache = NewCache()
-
 type Hashes struct {
 	mu            sync.Mutex
 	CurrentHashes map[string]bool
-}
-
-var SavedHashes *Hashes = &Hashes{
-	CurrentHashes: make(map[string]bool),
 }
 
 type TraitSavedConf struct {
@@ -56,7 +50,17 @@ type TraitSaved struct {
 	TraitSavedCount int
 }
 
-var SavedTraits *TraitSaved = NewSavedTraits()
+var cache *Cache
+var SavedHashes *Hashes
+var SavedTraits *TraitSaved
+
+func init() {
+	cache = NewCache()
+	SavedHashes = &Hashes{
+		CurrentHashes: make(map[string]bool),
+	}
+	SavedTraits = NewSavedTraits()
+}
 
 func NewSavedTraits() *TraitSaved {
 	var d = TraitSaved{}
@@ -74,7 +78,6 @@ func (s *TraitSaved) Lock() {
 	defer func() {
 		err := recover()
 		if err != nil {
-			fmt.Println("==================err")
 			fmt.Println(err)
 		}
 	}()
@@ -213,11 +216,11 @@ func (c ImageCreator) IsHashValid() bool {
 
 func (c ImageCreator) WriteTo(outputPath string) {
 	if c.final == nil {
-		utils.Fatal(errors.New("Final image is nil"))
+		utils.Fatal(errors.New("final image is nil"))
 	}
 	finalImageOutput, err := os.Create(outputPath)
 	if err != nil {
-		utils.Fatal(errors.New(fmt.Sprintf("failed to create: %s", err)))
+		utils.Fatal(fmt.Errorf("failed to create: %s", err))
 	}
 	jpeg.Encode(finalImageOutput, c.final, &jpeg.Options{jpeg.DefaultQuality})
 	finalImageOutput.Close()

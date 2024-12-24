@@ -1,6 +1,5 @@
 {
   "exclude": [
-   "eyes",
-    "mouth"
+    "Eyes"
   ]
 }

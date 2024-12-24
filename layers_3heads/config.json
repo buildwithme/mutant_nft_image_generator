@@ -1,4 +1,5 @@
 {
-  "normal": 100,
-  "rare":25
+  "normal": 70,
+  "rare":25,
+  "superRare":5
 }

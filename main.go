@@ -20,24 +20,27 @@ import (
 	"github.com/zenthangplus/goccm"
 )
 
-var counterMu sync.Mutex
-var counter int64
+var randomIndexMu sync.Mutex
+var randomIndex int64
+var folders = [][]string{
+	{"3 Head", "_3heads", "layers_3heads"},
+	// {"Clawdia", "_clawdia", "layers_Clawdia"},
+}
 
 func getRandom(max int) int {
-	counterMu.Lock()
-	rand.Seed(time.Now().UnixNano() + counter)
+	randomIndexMu.Lock()
+	rand.Seed(time.Now().UnixNano() + randomIndex)
 	number := rand.Intn(max)
-	counter++
-	counterMu.Unlock()
+	randomIndex++
+	randomIndexMu.Unlock()
 	return number
 }
 func main() {
 	processor()
+	// afterImageUpload()
 }
 
 func processor() {
-	var n int = 20
-	//argsWithProg := os.Args
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) == 0 {
 		argsWithoutProg = []string{strconv.Itoa(n)}
@@ -51,10 +54,12 @@ func processor() {
 		}
 	}
 
-	execute("3 Head", "_3heads", "layers_3heads", n)
-	execute("Clawdia", "_clawdia", "layers_Clawdia", n)
-
 	err := utils.EnsureDir(baseOutput + "/final/images")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = utils.EnsureDir(baseOutput + "/final/finalImages")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,23 +67,37 @@ func processor() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var counter = 1
+	err = utils.EnsureDir(baseOutput + "/final/finalMetadata")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	var folders = []string{"_3heads", "_clawdia"}
-	for _, folderOutput := range folders {
-		for i := 1; i <= n; i++ {
-			copyFile(fmt.Sprintf("%s/%s/finalImages/%d.png", baseOutput, folderOutput, i),
-				fmt.Sprintf("%s/final/images/%d.png", baseOutput, counter))
-			copyFile(fmt.Sprintf("%s/%s/metadata_OS/%d", baseOutput, folderOutput, i),
-				fmt.Sprintf("%s/final/metadata/%d", baseOutput, counter))
+	var counter int
+	var fullData = make(map[int]map[int]models.TraitSavedConf)
+	for _, data := range folders {
+		models.SavedHashes = &models.Hashes{
+			CurrentHashes: make(map[string]bool),
+		}
+		models.SavedTraits = models.NewSavedTraits()
+		outData := execute(data[0], data[1], data[2], n)
+		for i := 0; i < n; i++ {
+			fullData[counter] = outData[i]
+			copyFile(fmt.Sprintf("%s/%s/finalImages/%d.png", baseOutput, data[1], i+1),
+				fmt.Sprintf("%s/final/images/%d.png", baseOutput, counter+1))
+			copyFile(fmt.Sprintf("%s/%s/metadata_OS/%d", baseOutput, data[1], i+1),
+				fmt.Sprintf("%s/final/metadata/%d", baseOutput, counter+1))
 			counter++
 		}
 	}
+
+	randomizeMapFinal(fullData, len(fullData), "final")
+
+	generateRarity("final", fullData, len(fullData))
 }
 
 var baseOutput = "output"
 
-func execute(name, outputFolder, inputFolder string, n int) {
+func execute(name, outputFolder, inputFolder string, n int) map[int]map[int]models.TraitSavedConf {
 	err := utils.EnsureDir(baseOutput + "/" + outputFolder + "/images")
 	if err != nil {
 		log.Fatal(err)
@@ -266,6 +285,8 @@ func execute(name, outputFolder, inputFolder string, n int) {
 	models.SavedTraits.Data = randomizeMap(models.SavedTraits.Data, n, outputFolder)
 
 	m := generateOsMetadata(name, outputFolder, models.SavedTraits.Data, n)
+	writeToFile("output/"+outputFolder+"/all_metadata_OS", m)
+
 	rarity := make(map[string]map[string]int)
 	for i := 0; i < len(m); i++ {
 		elem := m[i]["attributes"].([]map[string]interface{})
@@ -281,43 +302,9 @@ func execute(name, outputFolder, inputFolder string, n int) {
 		}
 	}
 	writeToSimpleFile("output/"+outputFolder+"/rarity.json", rarity)
-	writeToFile("output/"+outputFolder+"/all_metadata_OS", m)
-
-	idByRarity := make([]RarityScore, n)
-	for i := 0; i < len(m); i++ {
-		idStr := strings.ReplaceAll(m[i]["name"].(string), "3 Head ", "")
-		idValue, _ := strconv.ParseInt(idStr, 10, 16)
-
-		var rs RarityScore
-
-		rs.Id = int(idValue)
-
-		elem := m[i]["attributes"].([]map[string]interface{})
-		for j := 0; j < len(elem); j++ {
-			attribute := elem[j]
-
-			traitType := attribute["trait_type"].(string)
-			value := attribute["value"].(string)
-			scoreRarity := rarity[traitType][value]
-
-			var count int
-			for _, v := range rarity[traitType] {
-				count += v
-			}
-
-			rs.Score += float32((float32(scoreRarity) / float32(count)) * 100)
-		}
-
-		idByRarity[i] = rs
-	}
-
 	generateRarity(outputFolder, models.SavedTraits.Data, n)
 
-	// Sort by age, keeping original order or equal elements.
-	sort.SliceStable(idByRarity, func(i, j int) bool {
-		return idByRarity[i].Score > idByRarity[j].Score
-	})
-	utils.PrintJson(idByRarity)
+	return models.SavedTraits.Data
 }
 
 type RarityStruct struct {
@@ -343,7 +330,7 @@ func generateRarity(outputFolder string, datas map[int]map[int]models.TraitSaved
 		}
 	}
 	utils.PrintJson(rarities)
-	writeToSimpleFile("output/"+outputFolder+"/rarestItems.json", rarities)
+	writeToSimpleFile("output/"+outputFolder+"/rarities.json", rarities)
 	for i := 0; i < n; i++ {
 		id := i + 1
 		key := datas[i]
@@ -389,11 +376,66 @@ func randomizeMap(datas map[int]map[int]models.TraitSavedConf, n int, outputFold
 	return
 }
 
+func randomizeMapFinal(datas map[int]map[int]models.TraitSavedConf, n int, outputFolder string) (rez map[int]map[int]models.TraitSavedConf) {
+	var ids []int
+
+	for i := 0; i < n; i++ {
+		ids = append(ids, i)
+	}
+
+	removeId := func(i int) {
+		ids[i] = ids[len(ids)-1]
+		ids = ids[:len(ids)-1]
+	}
+
+	rez = make(map[int]map[int]models.TraitSavedConf)
+
+	for i := 0; i < n; i++ {
+		id := getRandom(len(ids))
+		idFinal := ids[id]
+		removeId(id)
+		rez[i] = datas[idFinal]
+		copyFile(fmt.Sprintf("%s/%s/images/%d.png", baseOutput, outputFolder, idFinal+1),
+			fmt.Sprintf("%s/%s/finalImages/%d.png", baseOutput, outputFolder, i+1))
+		copyFileFinalMetadata(i+1, fmt.Sprintf("%s/%s/metadata/%d", baseOutput, outputFolder, idFinal+1),
+			fmt.Sprintf("%s/%s/finalMetadata/%d", baseOutput, outputFolder, i+1))
+	}
+	return
+}
+
 func copyFile(sourceFile, destinationFile string) {
 	input, err := ioutil.ReadFile(sourceFile)
 	if err != nil {
 		fmt.Println(err)
 		return
+	}
+
+	err = ioutil.WriteFile(destinationFile, input, 0644)
+	if err != nil {
+		fmt.Println("Error creating", destinationFile)
+		fmt.Println(err)
+		return
+	}
+}
+
+func copyFileFinalMetadata(index int, sourceFile, destinationFile string) {
+	input, err := ioutil.ReadFile(sourceFile)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	var m = make(map[string]interface{})
+	err = json.Unmarshal(input, &m)
+	if err != nil {
+		log.Fatal(err)
+	}
+	m["name"] = "Mutant Pollutant Planet " + strconv.Itoa(index)
+	m["image"] = "IPFS_URL/" + strconv.Itoa(index) + ".png"
+
+	input, err = json.MarshalIndent(m, "", "\t")
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	err = ioutil.WriteFile(destinationFile, input, 0644)
