@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "Desert-CAMO"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Green"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Geo-Dot"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/102.png",
+	"name": "Mutant Pollutant Planet 102"
+}

@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Black-White-Faces"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Zebra"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "PIN-HEAD"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		}
+	],
+	"image": "IPFS_URL/136.png",
+	"name": "Mutant Pollutant Planet 136"
+}

@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "Black-White-Faces"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		}
+	],
+	"image": "IPFS_URL/412.png",
+	"name": "3 Head 412"
+}

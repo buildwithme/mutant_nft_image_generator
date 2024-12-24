@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Nose-Hoop-Ring"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Venom"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tshirt-with-MPP"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "FlyTrap"
+		}
+	],
+	"image": "IPFS_URL/74.png",
+	"name": "Mutant Pollutant Planet 74"
+}

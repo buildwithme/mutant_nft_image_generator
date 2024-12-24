@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mario"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Pink"
+		}
+	],
+	"image": "IPFS_URL/259.png",
+	"name": "3 Head 259"
+}

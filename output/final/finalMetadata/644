@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "King-Kong"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "VIKING"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Background",
+			"value": "hieroglyphics"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Ether-Eyes"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		}
+	],
+	"image": "IPFS_URL/644.png",
+	"name": "Mutant Pollutant Planet 644"
+}

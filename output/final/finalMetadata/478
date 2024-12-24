@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "Cheetah"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "Shark"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Bandana"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Warp-Speed"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/478.png",
+	"name": "Mutant Pollutant Planet 478"
+}

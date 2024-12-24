@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "Warp-Speed"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		}
+	],
+	"image": "IPFS_URL/570.png",
+	"name": "3 Head 570"
+}

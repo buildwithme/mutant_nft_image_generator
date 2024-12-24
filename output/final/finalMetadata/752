@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "GEARS"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Blue"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Green"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		}
+	],
+	"image": "IPFS_URL/752.png",
+	"name": "Mutant Pollutant Planet 752"
+}

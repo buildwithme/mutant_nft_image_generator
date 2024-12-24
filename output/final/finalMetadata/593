@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-hat-Aqua"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Graphic-Tee"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Blue-Solid"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/593.png",
+	"name": "Mutant Pollutant Planet 593"
+}

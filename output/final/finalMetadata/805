@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "moutheye-switch"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Graphic-Tee"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "GEARS"
+		}
+	],
+	"image": "IPFS_URL/805.png",
+	"name": "Mutant Pollutant Planet 805"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Background",
+			"value": "AquaSolid"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		}
+	],
+	"image": "IPFS_URL/228.png",
+	"name": "Mutant Pollutant Planet 228"
+}

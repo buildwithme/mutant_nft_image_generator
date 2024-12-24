@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "ICE"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "mona-lisa"
+		}
+	],
+	"image": "IPFS_URL/77.png",
+	"name": "Mutant Pollutant Planet 77"
+}

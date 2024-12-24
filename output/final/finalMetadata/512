@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Blue-Solid"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "VIKING"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		}
+	],
+	"image": "IPFS_URL/512.png",
+	"name": "Mutant Pollutant Planet 512"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "WEED"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "DEVO-HAT"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "ICE"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		}
+	],
+	"image": "IPFS_URL/733.png",
+	"name": "3 Head 733"
+}

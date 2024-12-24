@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Gold"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "moutheye-switch"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Purple"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crown"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Blue-Solid"
+		}
+	],
+	"image": "IPFS_URL/846.png",
+	"name": "Mutant Pollutant Planet 846"
+}

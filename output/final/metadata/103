@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Right Head",
+			"value": "Mario"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Blue"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Purple"
+		}
+	],
+	"image": "IPFS_URL/103.png",
+	"name": "3 Head 103"
+}

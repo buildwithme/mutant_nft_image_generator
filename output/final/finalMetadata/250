@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "PIN-HEAD"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Fire"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Desert-CAMO"
+		}
+	],
+	"image": "IPFS_URL/250.png",
+	"name": "Mutant Pollutant Planet 250"
+}

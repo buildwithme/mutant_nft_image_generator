@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Purple"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "White"
+		}
+	],
+	"image": "IPFS_URL/99.png",
+	"name": "Mutant Pollutant Planet 99"
+}

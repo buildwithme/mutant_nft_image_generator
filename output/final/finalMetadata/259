@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Background",
+			"value": "mona-lisa"
+		}
+	],
+	"image": "IPFS_URL/259.png",
+	"name": "Mutant Pollutant Planet 259"
+}

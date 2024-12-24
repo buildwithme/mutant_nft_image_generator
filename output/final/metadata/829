@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "TYE"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Green"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hawaiian-shirt"
+		}
+	],
+	"image": "IPFS_URL/829.png",
+	"name": "3 Head 829"
+}

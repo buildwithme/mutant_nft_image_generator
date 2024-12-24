@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Cheetah"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Pink"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		}
+	],
+	"image": "IPFS_URL/625.png",
+	"name": "Mutant Pollutant Planet 625"
+}

@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "VIKING"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/489.png",
+	"name": "3 Head 489"
+}

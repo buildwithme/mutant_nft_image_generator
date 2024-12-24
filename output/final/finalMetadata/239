@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Purple"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "AquaSolid"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Polo-with-sweater"
+		}
+	],
+	"image": "IPFS_URL/239.png",
+	"name": "Mutant Pollutant Planet 239"
+}

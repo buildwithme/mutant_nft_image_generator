@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		}
+	],
+	"image": "IPFS_URL/522.png",
+	"name": "Mutant Pollutant Planet 522"
+}

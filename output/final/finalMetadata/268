@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "Graffiti"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crab"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		}
+	],
+	"image": "IPFS_URL/268.png",
+	"name": "Mutant Pollutant Planet 268"
+}

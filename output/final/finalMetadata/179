@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Diamond-Teeth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Blue-Solid"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Ether-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		}
+	],
+	"image": "IPFS_URL/179.png",
+	"name": "Mutant Pollutant Planet 179"
+}

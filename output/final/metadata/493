@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Diamond-Teeth"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "moutheye-switch"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "WEED"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Oculus"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Ether"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Zebra"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Polo-with-sweater"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		}
+	],
+	"image": "IPFS_URL/493.png",
+	"name": "3 Head 493"
+}

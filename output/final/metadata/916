@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "Hawaiian-shirt"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "BEEHIVE"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crab"
+		}
+	],
+	"image": "IPFS_URL/916.png",
+	"name": "3 Head 916"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Blue"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Ether"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Cheetah"
+		}
+	],
+	"image": "IPFS_URL/427.png",
+	"name": "Mutant Pollutant Planet 427"
+}

@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "mona-lisa"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		}
+	],
+	"image": "IPFS_URL/270.png",
+	"name": "Mutant Pollutant Planet 270"
+}

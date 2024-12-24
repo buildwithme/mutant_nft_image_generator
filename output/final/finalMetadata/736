@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "City"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Green"
+		}
+	],
+	"image": "IPFS_URL/736.png",
+	"name": "Mutant Pollutant Planet 736"
+}

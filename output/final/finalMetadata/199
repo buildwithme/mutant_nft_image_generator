@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mario"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Warp-Speed"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/199.png",
+	"name": "Mutant Pollutant Planet 199"
+}

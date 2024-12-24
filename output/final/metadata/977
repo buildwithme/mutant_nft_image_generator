@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "Zebra"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crown"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Nose-Hoop-Ring"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Fire"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		}
+	],
+	"image": "IPFS_URL/977.png",
+	"name": "3 Head 977"
+}

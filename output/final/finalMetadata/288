@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "Shark"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "GEARS"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		}
+	],
+	"image": "IPFS_URL/288.png",
+	"name": "Mutant Pollutant Planet 288"
+}

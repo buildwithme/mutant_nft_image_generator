@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "Tshirt-with-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		}
+	],
+	"image": "IPFS_URL/637.png",
+	"name": "3 Head 637"
+}

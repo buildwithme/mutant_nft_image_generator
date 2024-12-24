@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Pink"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Graphic-Tee"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Diamond-Teeth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Graffiti"
+		}
+	],
+	"image": "IPFS_URL/378.png",
+	"name": "Mutant Pollutant Planet 378"
+}

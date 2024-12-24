@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Nose-Hoop-Ring"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Blue-Solid"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "DEVO-HAT"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		}
+	],
+	"image": "IPFS_URL/188.png",
+	"name": "3 Head 188"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Graffiti"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Zebra"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		}
+	],
+	"image": "IPFS_URL/888.png",
+	"name": "3 Head 888"
+}

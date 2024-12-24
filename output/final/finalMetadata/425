@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		}
+	],
+	"image": "IPFS_URL/425.png",
+	"name": "Mutant Pollutant Planet 425"
+}

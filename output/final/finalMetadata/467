@@ -1,0 +1,34 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Gold"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Venom"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Diamond-TeethRightHead"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Warp-Speed"
+		}
+	],
+	"image": "IPFS_URL/467.png",
+	"name": "Mutant Pollutant Planet 467"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "Pink"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Vanilla-Ice"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-Moutj-green-smoke"
+		}
+	],
+	"image": "IPFS_URL/181.png",
+	"name": "Mutant Pollutant Planet 181"
+}

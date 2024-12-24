@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "Ether"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Gold"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Yellow"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "FlyTrap"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crab"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		}
+	],
+	"image": "IPFS_URL/290.png",
+	"name": "Mutant Pollutant Planet 290"
+}

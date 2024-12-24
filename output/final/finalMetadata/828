@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Steam-Punk"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Pink"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		}
+	],
+	"image": "IPFS_URL/828.png",
+	"name": "Mutant Pollutant Planet 828"
+}

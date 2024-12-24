@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-Moutj-green-smoke"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "DEVO-HAT"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/534.png",
+	"name": "Mutant Pollutant Planet 534"
+}

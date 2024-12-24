@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "Shark"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Mohawk-Rainbow"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Pin-Head-Jacket"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Desert-CAMO"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "moutheye-switch"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Nose-Hoop-Ring"
+		},
+		{
+			"trait_type": "Background",
+			"value": "GEARS"
+		}
+	],
+	"image": "IPFS_URL/495.png",
+	"name": "Mutant Pollutant Planet 495"
+}

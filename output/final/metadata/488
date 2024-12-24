@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Pink"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Venom"
+		},
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Cheetah"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		}
+	],
+	"image": "IPFS_URL/488.png",
+	"name": "3 Head 488"
+}

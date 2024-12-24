@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "mustache"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Warp-Speed"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Zebra"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "DEVO-HAT"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tshirt-with-MPP"
+		}
+	],
+	"image": "IPFS_URL/999.png",
+	"name": "Mutant Pollutant Planet 999"
+}

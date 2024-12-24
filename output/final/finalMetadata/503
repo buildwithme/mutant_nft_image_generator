@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Eyes-blue"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Pink"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Green"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Joint"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Graffiti"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		}
+	],
+	"image": "IPFS_URL/503.png",
+	"name": "Mutant Pollutant Planet 503"
+}

@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "BEEHIVE"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Steam-Punk"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Pin-Head-Jacket"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		}
+	],
+	"image": "IPFS_URL/398.png",
+	"name": "Mutant Pollutant Planet 398"
+}

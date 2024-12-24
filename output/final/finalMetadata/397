@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "AquaSolid"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tshirt-with-MPP"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "mustache"
+		}
+	],
+	"image": "IPFS_URL/397.png",
+	"name": "Mutant Pollutant Planet 397"
+}

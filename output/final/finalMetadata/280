@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hoodie-Gray-MPP"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Anime-Eyes-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "VIKING"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Pink"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		}
+	],
+	"image": "IPFS_URL/280.png",
+	"name": "Mutant Pollutant Planet 280"
+}

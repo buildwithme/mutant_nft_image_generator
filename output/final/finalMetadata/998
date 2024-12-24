@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Crab"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		}
+	],
+	"image": "IPFS_URL/998.png",
+	"name": "Mutant Pollutant Planet 998"
+}

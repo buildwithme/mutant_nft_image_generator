@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Right Head",
+			"value": "Crab"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "TIGER"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		}
+	],
+	"image": "IPFS_URL/708.png",
+	"name": "3 Head 708"
+}

@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Vanilla-Ice"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-Moutj-green-smoke"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Green"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "tentacles-Blue"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		}
+	],
+	"image": "IPFS_URL/880.png",
+	"name": "Mutant Pollutant Planet 880"
+}

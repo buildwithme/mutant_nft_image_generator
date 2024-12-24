@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Yellow"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "mustache"
+		},
+		{
+			"trait_type": "Background",
+			"value": "White"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Vanilla-Ice"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hawaiian-shirt"
+		}
+	],
+	"image": "IPFS_URL/387.png",
+	"name": "Mutant Pollutant Planet 387"
+}

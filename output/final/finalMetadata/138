@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Ether-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "BEEHIVE"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-Hat-MPP"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-Moutj-green-smoke"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Ether"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		}
+	],
+	"image": "IPFS_URL/138.png",
+	"name": "Mutant Pollutant Planet 138"
+}

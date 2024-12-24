@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "Graphic-Tee"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Multi-Blurred-Mist"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "BEEHIVE"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Vanilla-Ice"
+		}
+	],
+	"image": "IPFS_URL/564.png",
+	"name": "Mutant Pollutant Planet 564"
+}

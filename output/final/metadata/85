@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Eyes",
+			"value": "Ether-Eyes"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "FANGS"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "WEED"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Beanie-Purple"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Pin-Head-Jacket"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Coral"
+		}
+	],
+	"image": "IPFS_URL/85.png",
+	"name": "3 Head 85"
+}

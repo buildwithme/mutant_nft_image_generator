@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "White-Shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "Zippered"
+		},
+		{
+			"trait_type": "Background",
+			"value": "TYE"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "BEEHIVE"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-hat-Aqua"
+		}
+	],
+	"image": "IPFS_URL/18.png",
+	"name": "Mutant Pollutant Planet 18"
+}

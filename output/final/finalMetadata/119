@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Blood-Shot-Eyes"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "PIN-HEAD"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Desert-CAMO"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "Shark"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Hawaiian-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Diamond-Nose-Ring"
+		}
+	],
+	"image": "IPFS_URL/119.png",
+	"name": "Mutant Pollutant Planet 119"
+}

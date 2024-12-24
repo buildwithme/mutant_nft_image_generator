@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Mouth",
+			"value": "Pipe-mouth"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Fire"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "eyes2"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "King-Kong"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Baseball-hat-Aqua"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "Tye-Dye"
+		}
+	],
+	"image": "IPFS_URL/84.png",
+	"name": "Mutant Pollutant Planet 84"
+}

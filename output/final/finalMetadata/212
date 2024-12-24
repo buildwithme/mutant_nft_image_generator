@@ -1,0 +1,42 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Shirt",
+			"value": "Hawaiian-shirt"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "tongue"
+		},
+		{
+			"trait_type": "Background",
+			"value": "Smog-Landscape"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Skin",
+			"value": "Cheetah"
+		},
+		{
+			"trait_type": "Eyes",
+			"value": "Ether-Eyes"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "WEED"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "DEVO-HAT"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Nose-Ring"
+		}
+	],
+	"image": "IPFS_URL/212.png",
+	"name": "Mutant Pollutant Planet 212"
+}

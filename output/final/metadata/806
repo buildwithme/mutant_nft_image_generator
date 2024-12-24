@@ -1,0 +1,38 @@
+{
+	"attributes": [
+		{
+			"trait_type": "Skin",
+			"value": "CAMO_R"
+		},
+		{
+			"trait_type": "Right Head",
+			"value": "Minecraft-Steve"
+		},
+		{
+			"trait_type": "Mouth",
+			"value": "ZipperedRightHead"
+		},
+		{
+			"trait_type": "Background",
+			"value": "8-Bit"
+		},
+		{
+			"trait_type": "Body",
+			"value": "Mutant"
+		},
+		{
+			"trait_type": "Shirt",
+			"value": "striped-shirt"
+		},
+		{
+			"trait_type": "Nose",
+			"value": "Clown-nose"
+		},
+		{
+			"trait_type": "Left Head",
+			"value": "flowers-Blue"
+		}
+	],
+	"image": "IPFS_URL/806.png",
+	"name": "3 Head 806"
+}
